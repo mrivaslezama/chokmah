@@ -1,0 +1,197 @@
+Para crear un proyecto Rails mejorado y bien documentado, podemos seguir los pasos que mencionaste anteriormente, pero con algunas mejoras y comentarios adicionales en el código. Aquí está una versión mejorada, comentada y optimizada de los pasos para crear tu aplicación Rails "condominio":
+
+1. Crear la Aplicación Rails con PostgreSQL
+Ejecuta los siguientes comandos en tu terminal para crear una nueva aplicación Rails con PostgreSQL como base de datos:
+
+bash
+rails new condominio -d postgresql
+cd condominio
+2. Configurar config/database.yml
+Asegúrate de que tu archivo config/database.yml esté configurado correctamente para PostgreSQL. Aquí hay un ejemplo comentado:
+
+
+config/database.yml
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %> # Tamaño de la conexión del pool
+  username: tu_usuario_postgres # Reemplaza con tu usuario de PostgreSQL
+ 1 vulnerability detected
+3. Crear la Base de Datos
+Ejecuta el siguiente comando para crear las bases de datos:
+
+bash
+rails db:create
+4. Generar los Scaffolds
+Generar scaffolds para los modelos Condominio y Departamento. Esto creará modelos, controladores y vistas básicos.
+
+bash
+rails generate scaffold Condominio nombre:string direccion:string ciudad:string
+rails generate scaffold Departamento numero:string condominio:references
+5. Migrar la Base de Datos
+Ejecuta el siguiente comando para aplicar las migraciones y crear las tablas en la base de datos:
+
+bash
+rails db:migrate
+6. Configurar las Rutas en config/routes.rb
+Asegúrate de que las rutas estén configuradas correctamente en config/routes.rb:
+
+
+config/routes.rb
+Rails.application.routes.draw do
+  resources :departamentos
+  resources :condominios
+  devise_for :users # Ruta para Devise
+  root 'condominios#index' # Página principal
+7. Agregar Bootstrap (CDN) en app/views/layouts/application.html.erb
+Agrega Bootstrap para mejorar el diseño de tu aplicación. Aquí hay un ejemplo de cómo hacerlo:
+
+
+app/views/layouts/application.html.erb
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Condominio</title>
+  <%= csrf_meta_tags %>
+ Public code references from 7 repositories
+8. Instalar y Configurar Devise
+Agrega la gema Devise al Gemfile para manejar la autenticación de usuarios:
+
+
+Gemfile
+gem 'devise'
+Luego, ejecuta los siguientes comandos:
+
+bash
+bundle install
+rails generate devise:install
+ Public code references from 6 repositories
+Sigue las instrucciones que aparecen en la consola después de ejecutar rails generate devise:install. Por ejemplo, configura config/environments/development.rb para incluir:
+
+
+config/environments/development.rb
+config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+Ahora, genera el modelo de usuario:
+
+bash
+rails generate devise User
+rails db:migrate
+ Public code references from 6 repositories
+9. Mejoras Adicionales
+Agregar Navegación
+Puedes agregar una barra de navegación Bootstrap en app/views/layouts/application.html.erb para facilitar la navegación entre las páginas.
+
+Agregar Validaciones
+Considera agregar validaciones a tus modelos Condominio y Departamento para asegurar la integridad de los datos.
+
+
+app/models/condominio.rb
+class Condominio < ApplicationRecord
+  has_many :departamentos, dependent: :destroy
+
+  validates :nombre, presence: true
+  validates :direccion, presence: true
+
+app/models/departamento.rb
+class Departamento < ApplicationRecord
+  belongs_to :condominio
+
+  validates :numero, presence: true
+  validates :condominio_id, presence: true
+Personalizar Vistas
+Modifica las vistas generadas por los scaffolds para que se ajusten mejor a tus necesidades.
+
+Agregar Autorización
+Si necesitas controlar quién puede crear, editar o eliminar condominios y departamentos, puedes usar una gema como Pundit o CanCanCan.
+
+Agregar Relaciones
+Asegúrate de que las relaciones entre los modelos Condominio y Departamento estén correctas.
+
+10. Ejecutar la Aplicación
+Por último, ejecuta el servidor Rails:
+
+bash
+rails server
+Ahora puedes acceder a tu aplicación en http://localhost:3000. Deberías poder registrarte, iniciar sesión y administrar condominios y departamentos.
+
+Recuerda que este es un punto de partida. Puedes personalizar y expandir esta aplicación según tus necesidades.
+
+
+
+
+
+
+
+config/database.yml
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %> # Tamaño de la conexión del pool
+  username: tu_usuario_postgres # Reemplaza con tu usuario de PostgreSQL
+  password: tu_contraseña_postgres # Reemplaza con tu contraseña de PostgreSQL
+  host: localhost # Dirección del servidor PostgreSQL
+
+development:
+  <<: *default
+  database: condominio_development
+
+test:
+  <<: *default
+  database: condominio_test
+
+production:
+  <<: *default
+  database: condominio_production
+
+
+
+
+
+config/routes.rb
+
+
+Rails.application.routes.draw do
+  resources :departamentos
+  resources :condominios
+  devise_for :users # Ruta para Devise
+  root 'condominios#index' # Página principal
+end
+
+
+
+
+app/views/layouts/application.html.erb
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Condominio</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  <!-- Agregar Bootstrap CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <%= yield %>
+  </div>
+</body>
+</html>
+
+
+
+
+Gemfile
+
+
+gem 'devise'

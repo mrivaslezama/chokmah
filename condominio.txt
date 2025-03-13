@@ -1,0 +1,788 @@
+rails new condominio -d postgresql
+
+config/database.yml 
+rails db:create
+
+rails generate scaffold Condominio nombre:string direccion:string ciudad:string
+rails generate scaffold Departamento numero:string condominio:references
+
+db:migrate 
+
+Configura las rutas 
+config/routes.rb para incluir resources :edificios y resources :departamentos.
+
+
+Usa Bootstrap. Agrega el CDN en app/views/layouts/application.html.erb.
+
+
+Instala la gema Device: gem 'devise' y ejecuta bundle install.
+Configura Device: rails generate devise:install y crea el modelo de usuario: rails generate devise User.
+
+
+
+
+
+#######
+
+
+Título: “Reforzamiento Pro”
+
+Optimización del Proyecto “Reforzamiento Pro”
+
+Instalación y configuración de Rails:
+
+Asegúrate de tener Ruby y Rails instalados. Usa el comando rails -v para verificar la versión.
+Crea un nuevo proyecto con rails new edificios -d postgresql.
+Configuración de la base de datos:
+
+Edita el archivo config/database.yml con tus credenciales de PostgreSQL.
+Ejecuta rails db:create para crear la base de datos.
+Creación de modelos:
+
+Genera el modelo de Edificio: rails generate scaffold Edificio nombre:string direccion:string ciudad:string.
+Genera el modelo de Departamento: rails generate scaffold Departamento numero:string edificio:references.
+Migraciones:
+
+Ejecuta rails db:migrate para aplicar las migraciones.
+Controladores y Rutas:
+
+Configura las rutas en config/routes.rb para incluir resources :edificios y resources :departamentos.
+Interfaz de usuario:
+
+Usa Bootstrap. Agrega el CDN en app/views/layouts/application.html.erb.
+Modifica las vistas para usar tablas y botones de Bootstrap.
+Implementar autenticación:
+
+Instala la gema Device: gem 'devise' y ejecuta bundle install.
+Configura Device: rails generate devise:install y crea el modelo de usuario: rails generate devise User.
+Roles y permisos:
+
+Agrega un campo de rol al modelo de usuario y ajusta los controladores para restringir acciones según el rol.
+Pruebas finales:
+
+Inicia el servidor con rails server y verifica que todas las funcionalidades funcionan correctamente.
+Documentación y limpieza:
+
+Asegúrate de tener toda la documentación necesaria. Revisa el código y limpia lo innecesario.
+Siguiendo estos pasos, podrás optimizar y desarrollar tu proyecto “Reforzamiento Pro” de manera eficiente. ¡Éxito en tu examen!
+
+#####
+
+
+5. Configuración del Proyecto
+Base de Datos: Configuración en config/database.yml para conexión con PostgreSQL.
+Credenciales Sensibles: Uso de credentials.yml.enc para almacenar información sensible.
+6. Estructura del Proyecto
+Carpetas Clave:
+app/models: Modelos de datos.
+app/controllers: Controladores que manejan la lógica.
+app/views: Vistas que presentan la interfaz al usuario.
+7. Relaciones en la Base de Datos
+Relaciones Comunes:
+Uno a muchos (Ej: Edificios y Departamentos).
+Muchos a muchos (Ej: Edificios y Características).
+8. Generación de Modelos y Migraciones
+Scaffold: Uso de rails g scaffold para crear modelos, controladores y vistas automáticamente.
+Migraciones: rails db:migrate para aplicar cambios en la base de datos.
+9. Interacción del Usuario
+Autenticación: Implementación de gemas como devise para gestionar usuarios y roles.
+Rutas y Navegación: Configuración de rutas en config/routes.rb.
+10. Mejoras Visuales
+Bootstrap: Integrar Bootstrap para mejorar la interfaz de usuario con componentes y estilos.
+11. Buenas Prácticas
+Mantener la lógica en los controladores y modelos.
+Utilizar scopes y métodos de clase para consultas específicas.
+Evitar lógica de negocio en las vistas.
+
+
+
+######
+
+ya bienvenido entonces oficialmente ahora que emp al repaso chicos para el repechaje Ojalá que lleguen más compañeros pero si no aprovechemos que somos poquitos y hacemos la mayor cantidad de preguntas posibles tenemos hasta las 12 para poder hacerlo y y voy a compartir pantalla chicos de una ha cambiado mucho desde que el curso Oh cambió La Barrita sigue siendo una molestia La Barrita pero cambia ya cheno comoo dar para el repechaje voy abrir el chat acá por si tienen alguna pregunta si quieren consultar por chat si quieren abrir los
+01:08
+
+micrófonos chicos somos poquitos Así que si quieren preguntar directamente me interrumpen no más no hay problema Se me actualizó el al o no hay problema Ah se actualizó el o no De hecho Mira vamos a avanzar porque tú lo tienes instalado de la misma forma que yo así que creo no si lo hiciste con la ya vamos a ver lo siguiente lo primero les voy a no sé si esto lo tenías Mauricio pero lo voy a volver a pasar Richard me imagino que lo tiene pero siempre tenga la manito las guías que aquí Esta es la guía oficial de ru
+01:48
+
+rails Aquí está en el fondo toda la documentación cierto de todos los métodos de todos las funcionalidades y todo lo que puedes utilizar todo lo que puedes hacer con rails está dividido por recordemos que r rails es un framework cierto para construir aplicaciones web que está hecho con Ruby cierto se utiliza el lenguaje Ruby para trabajar con rails y es un framework que tiene la arquitectura mbc modelo vista controller se acuerdan por lo tanto la documentación está dividida también en ese sentido Tenemos aquí la
+02:27
+
+documentación básica Primero aquí podemos ver las distintas versiones de ru rails que tenemos a disposición ya todas a medida que van avanzando cierto se van generando algunas modificaciones en en algunos métodos se van agregando cosas quitando cositas Por lo tanto siempre es importante mantenerse al día y estar revisando la documentación dependiendo de la versión que ustedes quieran utilizar eh tenemos como comenzar con ra y aquí ya tenemos la división de todos los elementos que ustedes pueden utilizar y como les decía está dividido también de
+02:58
+
+esta forma en base a la arquitectura mbc por lo tanto tenemos todo lo que es referente a los modelos cierto recordemos también que rails es una Gema que básicamente está construida con varias gemas cierto de Ruby por lo tanto aquí en el fondo tenemos todas las las gemas que corresponden al las grandes gemas cierto las gemas principales que corresponden al al framework Y tenemos la documentación aquí si vamos a actico record que es la que la parte que se encarga cierto de los modelos de rails vamos a tener la parte de
+03:30
+
+básica digamos la parte que hace referencia a las migraciones como nosotros podemos ir generando migraciones aquí en en nuestro proyecto validaciones call etcétera Luego si pasamos a la vista modelo vista controller mbc tenemos todo lo referente a las vistas todo lo referente a los controladores y otros componentes como pueden ser action mailer cierto action cable que son otras cosas que podemos utilizar AC en este caso se ocupa para hacer en tiempo real Como por ejemplo chat cierto trabaja con websocket y bueno todo lo que ustedes
+04:06
+
+pueden necesitar de rails está acá ya van a encontrar todo lo que puedan necesitar dependiendo de la versión ustedes van buscando la documentación y como esto funciona con Ruby cierto que es el lenguaje principal tengan siempre a mano también la documentación de Ruby en este caso Les voy a dejar la versión que voy a utilizar yo que es la 3.
+04:27
+
+3.3 instalar una versión nueva para el repasito pero aquí en esta página tienen toda la document de Ruby que es Ruby doc existe otra también que es Ruby en donde ustedes pueden eho eh acá Bueno tenen aquí todo y si quieren buscar algo lo pueden hacer directamente acá si quieren buscar cosas como por ejemplo sobre aace hasta que ustedes coloquen a rey y tienen la documentación acá dependiendo de las versiones también van cambiando eh Hay cositas nuevas o cositas que van modificando al avanzando con las al avanzar con las versiones Pero si ustedes eligen una clase de Ruby ustedes
+05:17
+
+ya saben que Ruby funciona con clases tien todos los métodos que están destinados para esa clase ya en este caso tenemos todos los métodos para arreglos c aquí tenemos el método H es un método bastante utilizado que lo ocupamos ahí a esto con rails sobre todo no para listar o para cargar los elementos desde la base de datos Y aquí pueden ver cómo se utiliza con Ruby directamente ya no sé si los tenían ahí bueno Richard sé que sí pero Mauricio no sé si los tenías pero ahí te los dejo por si acaso ya para que lo tengan a Manito siempre es
+05:48
+
+bueno tener la documentación Ah te voy dejar también rubil en este caso ya eh dé entonces bueno Richard me preguntaba sobre la versión de rails cierto va a depender un poquito de cóm ustedes tengan instalado rails para en el fondo hacer el manejo y y el manejo de versiones básicamente cierto ver con Qué versión de Rubio estoy trabajando tengo que tener Rubi mi computador para poder ocupar rails y Qué versión de rails es la que yo estoy ocupando vamos a hacer un pequeño repasito en base a esto en este caso chicos para los que están viendo en casa
+06:40
+
+y para los compañeros que tenemos acá no sé si ma sigue eh presente pero ah aquí hay más gente que quiere admisión ya s va llegando más gente ahí tenemos a Patricio Salinas Buen día buen día a todos Buenos días y Paulino no sé si es la misma persona patri Paulino son distintos el Salinas verso s voy a dejar abierto esto si más gente bueno para los que vienen llegando chicos estamos recién comenzando el repasito dimos un minutos para ver si llegaba más gente y les estaba indicando que siempre tengan a manito la
+07:22
+
+documentación tanto de rails como de Ruby para que en caso de cualquier cosita cierto puedan irse seg guiando con ella No sé si los que vieran llegando la tenían eh pero la dejé en el chat s s Eh entonces ya contestando la pregunta de Richard entonces e nosotros podemos decidir en el fondo con qué tanto con Qué versión de Ruby como con cuál versión de rails nosotros queremos trabajar no y esto lo podemos lograr Gracias y va a depender como les comentaba también un poquito eh de cómo ustedes tengan instalado rails en este
+08:03
+
+caso yo y al menos la gente de mi curso que justo calza Ah que Richard hizo el curso conmigo instalamos rails a través de o en una un subsistema de Linux para Windows ya lo que hicimos fue que es una posibilidad que te da Windows crear un sistema paralelo cierto con un sistema operativo paralelo en Windows en Linux Perdón dentro de tu misma máquina cierto esto yo yo tengo Windows como ustedes pueden ver como puedes ver aquí cierto yo tengo Windows pero también al mismo tiempo tengo Linux dentro de mi mismo computador y aquí estoy en
+08:45
+
+Linux específicamente en una distribución que se llama unun y ahí fue donde instalamos rails nos da algunas ventajas Como por ejemplo poder hacer un buen control de versión y poder trabajar con todas las vers de Ruby y con todas las versiones de rails que nosotros queramos ya no tenemos que estar obviamente hay que instalarlas y hacer el manejo Pero podemos hacer el cambio y el paso de una a otra muy rápidamente para eso ocupamos un versionadores son las versiones yo tengo instaladas de ruia en este caso todas
+09:24
+
+esas versiones de ru en esta máquina y dentro de cada una de estas versiones de Ruby yo voy a tener instaladas ciertas gemas cierto pues las gemas se instalan específicamente para cada versión de Ruby y en el caso de esta versión en la que yo estoy actualmente paradito que sería la versión 3.
+09:47
+
+3.3 vamos a revisar Cuáles son las versiones de rails que tengo con el comando G list rails y vamos a ver que tengo al menos acá Tengo estas versiones la 8.01 y la 7 134 la estaba probando para hacer un así una un proyectito eh Y la 7.13 Entonces yo podría eventualmente ocupar cualquiera de estas versiones de rails para trabajar ya eh Richard Si quieres puedes ir siguiendo lo que voy haciendo también con los mismos comandos y yo puedo elegir chicos dentro de todas las versiones de rails que tenga mi máquina cierto puedo elegir con Cuál es la que
+10:25
+
+quiero trabajar o con Cuál es la que quiero generar un nuevo proyecto vamos a ver y vamos instalar otra para e vamos a ver cuáles son las versiones de las gemas unas versiones un poquito más nuevas octbre ya vamos a solamente para refrescar la memoria vamos a instalar la versión do vamos a trabajar con esa que es la última versión entre comillas estable de de Ruby cierto antes de que pasaran la versión 8 que trae cosas muy distintas chicos no sé si han revisado la versión 8 de ra pero trae cositas muy distintas a las que aprendieron tiene
+11:14
+
+altas actualizaciones super interesante Les recomiendo que si les gustó rails que la revisan profe Sí en general Cuáles son como Grand s en general Mira eh cosas super importantes Como por ejemplo que están e están haciendo un pequeño cambio en lo que es el manejo de assets por lo tanto la Gema que se utilizaba para hacer el manejo de assets que era sprockets y import map cierto la están modificando y ahora están introduciendo una nueva que se llama prop chaft E que va a ser un manejo de los un poquito más ágil
+11:56
+
+eh introdujeron También en la nueva la última versión un que cosa que está se estaba pidiendo hace mucho tiempo eh Por fin introdujeron un em un sistema entre comillas nativo para hacer despliegues que se llama camal ya que bueno camal no es no está escrito Ruby no es de Ruby pero lo sumaron digamos a Ruby rails y se hace bastante más fácil el despliegue tú puedes ahora hacer despliegue desde cualquier parte con ru rails eh utilizando esa tecnología y e eh generaron hartos métodos nuevos tanto para la parte de los modelos
+12:35
+
+eh mejoraron el trabajo en este caso con hay algunas cositas nuevas con sq l que es un un motor de base de datos bien ágil cierto que no no tiene toda la robustez que tenía e postgress pero tiene otras cualidades que le permiten funcionar Incluso como una base de datos temporal ya como en el fondo trabajar con con redis funciona más rápido que redis no sé si ustedes saben mucho esto pero funciona como una basecita lo pueden hacer funcionar como una base de dato temporal en esta nueva versión de de rails y además además además
+13:15
+
+eh tiene cositas nuevas bien interesantes Como por ejemplo un una forma nativa de hacer autenticación ya no es necesario instalar device porque rail ahora trae un generador para hacer autenticación ra G authenticate básicamente con eso pu generar un sistema de autenticación nuevo automáticamente al ti es lo leí o sea algunos dicen que no es tan no es tan moldeable como device pero funciona Yo diría que es más moldeable que mucho más moldeable que device pero al ser diría que es alto moldable Y eso significa que requiere más trabajo y
+14:04
+
+creo que ahí está el problema El problema es que trae muchas cosas que ya están listas así de paquete en cambio este generador en el fondo es como generar un modelo desde cero un controlador desde cero un r controller pero sin hacer el scaffold entiendes Entonces tú tienes que hacer todos los métodos desde cero básicamente Ahí está como la parte Digamos que ya tienes que saber es lo que manejar manejar las cookies todo eso porque en el fondo dev eso ya lo hace automáticamente perfectoo interesante entonces chicos recordemos un poquito
+14:41
+
+tenemos la posibilidad de instalar gemas cierto tanto nuestra máquina como nuestros proyectos de rails Si queremos instalar una gem en nuestra máquina utilizamos El Comando G install cierto rails en este caso y vamos a instalar la versión 7.2 2.2 no jm install rails versión 7.2.2 eh si hacemos eso vamos a ver que nos va a instalar entonces en nuestra maquinita después de un ratito haga la conexión Ahí está está instalando entonces todas las gemas correspondientes a esta versión de rails y una vez que termine no se demora
+15:25
+
+mucho tiene instalada la parte base Sí para rellenar más mientras haces el a mí me llamó la atención de que el el tutorial que hay en la página de re para el siete por ejemplo es un blog y para el oo es un ecommerce como que más encontré que más completo por último o sea por lo menos la explicación que tienen para el oo y y me gustó que fuera orientado a un ecommerce a un blog que es más simple sí interesante la verdad no no lo había visto pero claro Genial porque tenes muchas más opciones cierto sobre todo Me
+16:02
+
+imagino que en cuanto en cuanto a manejo de de relaci y ese tipo de cosas debe ser más o menos lo mismo No pero claro da más opciones de de mostrar otras cositas de Cómo mostrar Cómo usar las vistas A lo mejor que eso también es importante Entonces sí interesante eso qu bueno que lo hayan actualizado no sé si conocen esta página también Go rails est Pina tambén es buen tenas guías Y sí hasta un cierto nivel gratis y después hay un curso que tien es p algunas cosas pag pero y aquí tienen Cómo hacer despliegue con rails Y cómo hacer la instalación de
+16:39
+
+rails en su computador dependiendo de e el sistema Por supuesto si lo quieren instalar en Windows y aquí ustedes pueden ver que lo instala también creando una máquina virtual de Linux en su computador si quieren hacerlo de esa forma ahí está la opción se los dejé en el chat por si acaso chicos eh ya no me sale instalación del 8 de nuevo no me sale el 7.
+17:09
+
+22 s Tranquilo tranquilo vamos vamos mira ahora ya Ya instalé esta nueva versión de cierto si voy a hacer un listado de las gemas g l las gemas que se llamen rails cierto con el comando G list rails vamos a ver que aquí tengo mi Gema rails y ahora aparece esta nueva versión que acabo de instalar No 7.2.
+17:30
+
+2 ahora si yo quisiera hacer inicio de proyecto con un rails New que va a ser el rails New El Comando que ya conocemos cierto ra New iniciamos un nuevo proyecto de rails va a ir a tomar la última versión que encuentre de rails y va a crear el proyecto con esa versión eso ya lo sabemos cierto Me imagino que todos lo saben chicos o alguien no lo sabía me van avisando por favor ya somos poquitos Así que si quieren abran el micrófono ya s pero nosotros también Tenemos la oportunidad si tenemos eh instaladas varias versiones de rails nosotros tenemos la posibilidad y rails nos da la
+18:07
+
+posibilidad de que nosotros podamos elegir Perdón cualquier versión de rails que queramos para iniciar un proyecto Y eso se hace especificando la versión para eso dentro del Comando RS New nosotros tenemos que indicarle Cuál es la versión que queremos ocupar en este caso yo voy a iniciar este un proyectito nuevo para que podamos a hacer en el fondo el repaso y le voy a especificar que quiero con un guion bajo después de la palabra rails vamos a especificar la versión que yo quiero ocupar en este caso es la 7.2.2 cierro con gu bajo y ahora escribo
+18:37
+
+el New y el nombre del proyecto vamos a crear un proyecto que chicos si Todos quieren seguirme ahora sería ideal Si todos tienen acceso computador en este caso y tien su ambiente de ra ya preparado para trabajar les voy a pedir que creen un proyecto con la versión de rail que ustedes tengan chicos yo solamente lo voy a hacer específicamente con esta versión primero para demostrar El ejemplo digamos que podemos trabajar con cualquier versión y eh porque nosotros estuvimos el curso con la versión 7 de ra no Por lo tanto vamos a trabajar con
+19:06
+
+eso eh Entonces vamos a crear un ejercicio que se llame eh o un proyecto que se llame edificios vamos a hac un ejemplo muy típico y lo vamos a crear con eh postgress No por lo tanto vamos a a pasar la banderita gu d para poder elegir el motor de base de datos que nosotros vamos a utilizar y vamos a elegir ql ese sería el para los que ya o tienen una sola versión cierto Esto lo digo también porque está quedando grabado Así que para la gente que lo va a ver después en la grabación basta con que hagan rails New edificios espacio gu d
+19:47
+
+espacio en este caso voy a volver a escribir 7.2.2 Yo tengo varias y al darle enter Entonces se va a crear un proyecto profesor una consulta Sí hay alguna forma de que de todas estas versiones de rails que como predeterminado 7.22 que es más estable Por decirlo de una manera el predeterminado siempre va ser la última versión Ah pero como viste es fácil digamos porque el proyecto se inicia una sola vez y eso es lo bueno dentro de todo no ya viste que basta con agregar en el fondo la versión entre dos guillones bajos entonces no es tan tan complejo
+20:52
+
+ya ya vimos que aquí Acaba de terminar entonces con la instalación de nuestro proyecto chicos ustedes me van diciendo me van siguiendo con con la creación del proyecto o si están mirando está bien si me van siguiendo por me van diciendo si ya termin de instalar ya s Entonces vamos a ver que se creó una carpetita si hacemos ls acá se creó una carpetita que se llama edificios que era el nombre de nuestro proyecto por lo tanto Vamos a ingresar ahí y vamos a abrirla en visual Studio code cierto con el comando code espacio
+21:25
+
+punto aquí podamos ver el código se abrió ot pantalla Así que lo traigo para acá Aquí está aquí tenemos nuestro nuevo proyecto de rails que se llama edificios Y si vamos a revisar primero vamos a ver que está en la versión de Ruby 3.3.3 que es la versión que yo tenía activa que les mostré cierto y si vamos a las gemas al G file vemos Que efectivamente me tomó la versión que yo le pedí específicamente y estamos trabajando con la 7.2.
+21:59
+
+2 sube Entonces vamos a esto es un repaso Entonces igual quiero vamos a ver algunas cositas que son básicas pero vamos a ir avanzando en torno a lo que es el repechaje no recordemos que Rubio entonces tiene una arquitectura mbc modelo vista controller y por lo tanto todas estas carpetitas que vamos a estar acá van a estar organizadas en torno también a eso recordemos que todas las carpetas que y todos los archivos que genera Ruby primero vamos a ver en orden alfabético no sé si sabían eso se habían dado cuenta pero están en orden alfabético
+22:33
+
+cierto primero los e primero las carpetas y luego los archivos cierto aquí hay cosas super importantes que son las las carpetas donde van más vamos a trabajar nosotros usualmente que es la carpeta app donde vamos a encontrar precisamente esta estructura mbc aquí tenemos la carpeta para nuestros modelos cierto models Para nuestras vistas views y para nuestros controllers que dónde vamos a pasar la gran o la mayoría de nuestro tiempo cierto cuando estemos trabajando con rion rail otra carpeta importante la carpeta config donde vamos a tener
+23:08
+
+precisamente la configuración de nuestro proyecto eh Y vamos a configurar algunas cositas desde ya vamos a ir aquí dentro de la carpeta config a un archivo que se llama database yamel donde ya vemos que nuestro proyecto está configurado para utilizar como adaptador o como motor de base de datos postgress sql que es el motor de base de datos que aprendimos en el curso pero para que esto funcione y podamos conectarnos con Pos cierto tenemos que darle algunas indicaciones adicionales y tenemos que darle el username que nosotros utilizamos para
+23:42
+
+conectarnos con posg cierto en este caso en el caso mío el menos es postgress cada ustedes ahí tienen su configuración cada uno tiene su configuración específica de postgress con su propio usern y su contraseña pero para la gran mayoría dees ser que es el que viene por perfecto tenemos que agregar también nuestro password he hecho varios cursos ya tod se saben mi password de no hay problema ahí está y tenemos que agregarle algunas cositas adicionales para ayudarlo a encontrar más fácil en este caso que Podemos agregar Cuál va a
+24:16
+
+ser el Host que vamos a utilizar que casi siempre es el el local Host que es el 127 0.0.1 y el puerto que vamos a utilizar que por defecto Al momento de instalar postgress casi siempre lo dejamos o viene cierto con el puerto 5432 ya es de ser el puerto que utiliza po entonces con ese información nuestro proyecto de rails ya debiese ser capaz de e conectarse con eh la base de datos con el motor de base de datos cierto que es otro programa que nosotros tenemos en el computador y ya deberían funcionar en conjunto e
+25:06
+
+ya otro eh otra Z importante otro otro archivo importante que también vamos a tocar no tan usualmente pero si es probablemente que para proyectos más grandes si lo tengamos que tener en mente es el archivo de rutas cierto que va a tener todas las rutas que nosotros vamos a eh gener para nuestro proyecto eh Y aquí las podemos modificar Podemos agregar o podemos quitar rutas dependiendo de lo que se nos esté solicitando o de las necesidades de nuestro proyecto cierto entonces este también es un archivo importantísimo que
+25:46
+
+también se encuentra dentro de la carpeta config ya aquí también tenemos cosas super importantes que me imagino que ustedes ya saben pero solamente para refrescar la memoria la Master key que es un archivo cierto con una llave maestra básicamente que con la que nosotros podemos acceder e a nuestro proyecto ya eh archivos que están encriptados Como por ejemplo las credenciales eh Y eso básicamente cierto e un segundito de hecho vamos a hacer eso chicos se acuerdan como Porque acá si nosotros configuramos nuestra basecita de datos
+26:40
+
+en el archivo database yamel si nosotros eventualmente quisiéramos subir este proyecto A github qué pasaría qué pasaría chicos no no te podría te podría pero quedarían expuestas no tú en G podrías ver cuá cuál es tu clave no cosa que no es lo ideal entonces un segundito Entonces nosotros podemos ocupar una herramienta que viene con rails cierto es probable que ha otras durante el curso dependiendo con Qué profesor estaba cierto y quién les hizo clase pero hay una herramienta que viene con rails que son las credenciales de
+27:36
+
+rails que nos permiten a nosotros e esconder información sensible no eh Entonces nosotros podemos esconder estas en este archivo acá que se llaman credenciales yamel en ese en significa encrypted no que es un archivo encriptado de hecho si nosotros abrimos este archivo que tenemos acá vamos a ver una ser de e e caracteres y símbolos cierto que no significan nada pero que si se des encriptan vamos a poder ver lo que tenemos guardado ahí de verdad para poder abrir este archivo no sé si lo conocían los chicos que son del otro
+28:12
+
+curso de los otros cursos digamos que no no estuvieron conido pero para poder abrir este archivo tenemos El Comando rails eals en este caso vamos a ocupar la edición de las credenciales credencial edit y e bueno acá nos va a dar un pequeño aviso que para poder abrirlo en para poder abrirlo Studio tenemos que usar este pequeño comandito Entonces vamos a modificar en vez de ocupar el el ide que se llama mate vamos a ocupar visual Studio code vamos a cambiar esto code voy a pasar el el El Comando chicos ahí está el comando
+28:56
+
+está en el chat Y si nosotros le damos enter a este comandito que nos sugiere el mismo rails vamos a poder Ahora sí ver el contenido de ese archivo que está encriptado en este caso estamos viendo ese archivo credentials.yml.enc Ahí está credencial yamel pero ahora está desencriptado Y eso está desencriptado gracias a la Master key si no tuviéramos la Master key no podríamos ver este al elemento cierto este es un archivo yamel si recordamos estos archivos e es una especie de de de formato cierto como el formato json en este caso el yamel eh
+29:32
+
+que tiene un formato específico para que nosotros se puedan leer eh que está basado en indentaciones cierto eh Y aquí nosotros Podemos agregar nuestras todos los elementos que nosotros no queramos que se vea básicamente o que queramos esconder que usualmente son las contraseñas o información sensible datos sensibles lo podemos esconder acá Entonces por ejemplo Ahora yo voy a esconder las credenciales de mi base de datos para eso voy a crear eh aquí cierto un una línea que se llama db haciendo referencia a la database base de datos
+30:06
+
+le vamos a dar enter vamos a intentar hacer una inación hacia la derecha para quedar dentro en el fondo de lo que estamos hablando de base de datos de database y Aquí vamos a guardar nuestro username en este caso postgress y nuestro password Así vamos a guardar y vamos a cerrar simplemente nuestro archivo de credenciales fíjense que ir acá fíjense que aquí eh En nuestro servidor sigue abierto sigue como hay un espacio eh Como latente en el fondo nos ha cerrado Está esperando que nosotros hagamos la edición de las credenciales ya en este
+30:49
+
+caso lo hicimos lo guardamos con control S como cualquier otro archivo que estemos trabajando y cuando lo cerremos vamos a ver que vuelve nuestro terminal a la normalidad cierto ya podemos seguir trabajando y ahora viene la segunda parte cierto ya tenemos esta misma información guardadita en ese archivo credenciales punto que está encriptado por lo tanto ahora tenemos que hacer referencia a ese archivo para ir a buscarlo cómo lo hacemos vamos a e ocupar cierto e en este caso las etiquetas para poder expresar un elemento de eh Ruby cierto
+31:25
+
+en una cadena que serían eh esta etiqueta cierto la etiqueta Rocket con el porcentaje adentro tal como si lo hiciéramos en una vista y vamos entonces indicar que en rail específicamente nuestra aplicación de rails rails application va a existir un archivo que se llame credencial crals y dentro de credencial vamos a buscar una Lía que diga db de base de datos y dentro de base de datos Aquí vamos a encontrar un elemento que se llame username y cerramos el cerramos la etiqueta con porcentaje y el signo mayor para el password podemos
+32:21
+
+hacer exactamente lo mismo copiamos acá y en vez de username vamos a buscar cierto password y lo vamos a guardar entonces fíjense que ahora no estamos mostrando nuestr nuestra información sensible ni nuestro password ni nuestro username cierto Está guardado acá en las credenciales nosotros ahora podemos subir libremente este este proyecto a a github y la gente solamente va a ver esto y no va a poder ver lo lo otro cierto y si acceden al archivo de credencial est encriptado Y qué pasa No sé si se han dado cuenta
+33:00
+
+pero eh la Master key aparece como como muteada o sea la Fuente aparece como muteada como como más gris no eh estos archivos que parecen así o o carpetitas quiere decir que están eh ignoradas están ignoradas y no se suben a github aparecen entonces en nuestra en el git ignor no ahí está Master key por lo tanto está ignorando en el fondo la subida de esa Master key y cuando nosotros subimos nuestro proyecto a github eh No va a subir la Master key va a subir todos todos los archivos que están acá excepto la Master key por lo tanto
+33:41
+
+no nadie va a poder ver nuestras credenciales que no seamos nosotros ya si alguien quiere descargar este archivo y utilizarlo va a tener que crear su propia Master key y va a tener que crear sus propias credenciales se entiende chicos no sé si lo sabían los que estn ahí en otros cursos pero a ver algo adicional confirm ahí si si lo sabieron ya pero ahí tienen ahí buenísimo sí un una medita de seguridad importante Ya existen otras elementos que podemos utilizar otras gemas incluso que que sirven también para esconder secretos cierto usualmente
+34:17
+
+gemas que los manejan como eh variables de entorno como dotem cierto que es bastante famosa imagino que se las comentaron también en el curso pero está una forma que ya viene incorporada con rails no hay que agregar absolutamente nada simplecov e configurado entonces nuestro proyectito la configuración más básica y podemos ir entonces ahora ya a la siguiente parte que sería chicos yo voy a hacer un paso un paso previo porque esto no lo ha ustedes voy a hacer un rails de Drop porque probablemente ya tengo una base
+34:57
+
+de datos que se llama edificios entonces hagan como que no hice esto esperar que se conecte siempre la primera se demora ahí efectivamente tenía una Entonces ya teniendo nuestra configuración lo que tocaría hacer ahora es hacer la creación de la base de datos cierto con rails tb create ra create y todos Ya deberían esto lo tienen que hacer todos Ya se va a crear la base de datos en su postgress si ti por supuesto bien escritas las credenciales el username el password va a aparecer este mensaje de que se ha creado Entonces esta base de
+35:54
+
+datos para este nuevo proyecto ya y ahí ya podemos empezar a trabajar entonces chicos ahora modo de repaso vamos ya de cabecita con lo que es el repaso para el repechaje porque el repechaje se trata de hacer una aplicación desde cero cierto una aplicación con ciertas características que les van a indicar en el momento pero que usualmente todos los repechajes tienen una estructura relativamente similar en todos los repechajes O sea no los repechajes sino que en todos los exámenes van a pedir algunas características que ustedes Espera que
+36:29
+
+hayan aprendido cierto y que tengan claros después del curso primero la utilización de rails la la posibilidad de crear un nuevo proyecto con ru rail cierto eh Y de ahí cosas cada vez un poquito más difícil Como por ejemplo que ustedes sean capaces de e generar una aplicación dentro de ru rail aplicación web por supuesto eh Y las características que siempre van a solicitar es que tenga algunos modelos Solamente les van a pedir tres o cuatro más que eso no y dentro de esos modelos van a existir algunas relaciones cierto se acuerda lo
+37:08
+
+que son las relaciones de los modelos si alguien me puede comentar reles mucho Exacto Exacto son relaciones dentro de lo que es la base de datos cierto relaciones entre las tablitas de su base de datos y usualmente les van a pedir siempre siempre siempre dentro de los ejercicios va a aparecer eh dos tablas que van a estar en relación uno a muchos va a existir una relación uno a n y otras dos tablas que van a estar en relación muchos a muchos siempre va a aparecer una relación muchos a muchos que sabemos que son un poquito más difíciles Por qué
+37:40
+
+cómo hay que resolver una relación muchos a muchos chicos se acuerdan es la con una tabla intermedia Exacto con una tabla intermedia la particularidad cierto de las relaciones muchos a muchos y la dificultad es que hay que construir una tabla intermedia no y siempre va a ser eso además les van a pedir ahí probablemente algún sistema de autenticación para eso tenemos la Gema device ya que ya nos ayuda bastante con eso y Y eso básicamente es el examen cierto una aplicación que vaya como en esa línea por supuesto con su con su Front
+38:18
+
+no que lo pueden desarrollar directamente acá en rails con r con con Sí con con ruis con erb que es el motor de plantillas de rui en vez de r s ya tenemos entonces configurado Y tenemos listo para empezar nuestro proyecto vamos a hacer entonces lo siguiente chicos en este caso para ir refrescando un poquito la memoria y y ayudarlos en el fondo para que ustedes puedan ver cómo empezar un proyecto desde cero a terminar Algo similar a lo que les piden en un examen vamos a trabajar con ejemplo que es super típico chicos super típico eh pero
+39:02
+
+que aporta bastante eh vamos a hacer una aplicación e de administración de edificios administración entre comillas ya no nos vamos ir tan en la profunda Porque la idea es que sea simple y similar a lo que se pide en un en un exam Entonces cuál es la gracia de esta aplicación la gracia de esta aplicación es que podamos tener varios edificios cierto podemos nosotros guardar y almacenar en la base de datos de esta apliación varios edificios con su nombre el nombre del edificio la dirección y algunas características ahí No no vamos
+39:34
+
+a hacer muchas pero que queda ahí una tablita para guardar nuestros edificios junto con eso vamos a hacer lo siguiente vamos a imaginarnos que esto es una aplicación para una inmobiliaria No y esa inmobiliaria va a tener la posibilidad de o o se dedica a arrendar e departamentos dentro de esos edificios ya Entonces qué es lo que hacen se hablan con las inmobiliarias se consiguen el listado de todos los departamentos que están para arriendo para venta entre comillas y y los vamos a listar dentro de esos edificios Entonces ya ya con eso tenemos
+40:09
+
+dos tablitas no la tablita de edificios donde vamos a guardar todos los edificios y una tablita para departamentos donde vamos a guardar todos los departamentos que tenemos disponibles Pero existe una relación entre edificio y departamentos no Qué relación existiría entre edificios y departamentos un departamento pertenece a un edificio y un edificio puede tener muchos departament tal cual por lo tanto Qué tipo de relación tenemos ahí uno muchos muchos un edificio puede tener muchos departamentos uno muchos todos de acuerdo con
+40:56
+
+Patricio eh Ya s exactamente tenemos una relación de uno a muchos Entonces cuál es el paso dos si es que alcanzamos Bueno vamos a tratar de hacerlo lo más rápido posible pero la idea es que también tengamos una relación de muchos a muchos Y esa relación de muchos a muchos la vamos a establecer entre eh las características que pueda tener el edificio Porque todos los edificios usualmente tienen algunos servicios Como por ejemplo estacionamiento quincho piscina juegos infantiles áreas verdes etcétera no por lo tanto vamos a construir también
+41:30
+
+otra relación o otra tabla para esas características ya y como ya adelanté cierto aquí viene la relación mucho a muchos porque vamos a tener varios edificios vamos a tener varias características y un edificio puede tener muchas de esas características un edificio puede tener piscina estacionamiento etcétera etcétera Pero esas características van a pertenecer también a varios edificios cierto más de un edificio puede puede tener piscina más de un edificio puede tener quincho y así se entiende por lo tanto se genera una relación muchos a
+42:04
+
+muchos ahora con rails existían dos formas de resolver esa relación de muchos a muchos Cuáles cuáles eran esas dos formas chicos en ambas formas se genera en ambas formas se genera una tabla intermedia pero son dos formas distintas se acuerdan No yo no me acuerdo tenemos una forma en la que vamos a hacer eh vamos a ocupar tres tablas como siempre cierto son las dos tablas más la tabla intermedia pero solamente dos modelos que esa es con el e has and belongs to many se acuerdan de ese helper has and belongs to many sí s
+42:54
+
+y tenemos la la otra forma la forma más correcta entre comillas porque es la forma que nos permite escalar mejor la aplicación que es la forma con tres modelos Ya donde vamos a tener tres tablas y tres modelos un modelo para cada tabla que es con el has acuerdan del has lo vieran no bueno el hasb through nos va a servir para que en caso de que nosotros eventualmente queramos tocar esa tabla intermedia y manipular esa tabla intermedia utilizando rails lo podamos hacer y eso nos permite escalar eventualmente eh Mejor nuestra
+43:48
+
+aplicación y es la forma más recomendada chicos para hacer y resolver eh relaciones eh de muchos a muchos por si acaso si Les recomiendo que más adelante revisen esa parte para efectos prácticos del ejercicio como es una aplicación que sabemos que no vamos a escalar y aquí estamos 100% seguro que lo más probable es que el examen no lo escalemos no lo sigamos trabajando es simplemente un examen vamos a ocupar el has and belongs to many ya la versión con solamente dos modelos Perdón perdón el el el que mencionaba has true Cómo se
+44:21
+
+escribe como verdad true no como a través ah como lo puse en el ya per Ah no es lo vimos lo vieron lo que visto te entendido comoen que vist a través de esa ya para efectos prácticos de como les digo del de este examen porque estamos seguros que este proyecto en verdad no lo vamos a seguir escalando Entonces es relativamente seguro utilizar la forma simple con dos tablas con dos modelos noom más eh vamos a utilizar el hassan belongs to mail ya para establecer esa relación de muchos a muchos y Les recomiendo también
+45:07
+
+que lo utilicen si es que si si es que la aplicación lo sostiene o sea se sostiene esa forma porque se les va a hacer más fácil más rápido ya que trabajar con el true true eh bienvenido ahí a cristó viene incorporarse veo que está de el iPhone Pero ojalá pueda ir ir siguiendo lo que vamos haciendo con el computador eh Ya chicos entonces manos a la obra vamos a seguir trabajando eh preguntita qué es lo que harían ustedes qué es lo que primero harían ustedes al momento de empezar el desarrollo de su proyecto de su
+45:48
+
+examen ya creamos nuestro proyecto cierto lo configuramos eso siempre van a ser los primeros pasos paso uno para todos no para que podamos ya empezar a trabajar Pero qué es lo que harían primero ustedes chicos entendiendo ya lo que estamos tratando de hacer cierto que es este sistema para eh administrar edificio y departamento no hay que dibujar las relaciones Cómo hay que dibujar las relaciones las tablitas vamos a dejar las relación el modelo no sé có se llama físico modelo no muy bien para eso vamos a ocupar vamos crear aquí un diograma aquí
+46:26
+
+entonces vamos a ocupar dr. si conocen Dr pero más fcil vamos a hacer de relación y vamos a crear ya algunas tablitas cierto tenemos una dos TR Entonces lo primero lo importante es entender el ejercicio No eso es lo que tenemos que tener claro tenemos que entender ejercicio el ejercicio de la mejor forma posible para poder desarrollar y poder ya pasarlo a código entonces aquí vamos a poner la primera tabla sabemos que todo esto gira en torno a los edificios cierto edificios y dijimos que vamos a tener departamentos y que vamos a tener
+47:15
+
+características para los edificios no o características como más le podríamos colocar e caracter amenidades as LL o no cómo en algunas partes p amenidades o no facility inglés Ah sí facilities ya le poner facilites facilit ya Eh bueno Esto lo ya Eh bueno todas nuestras tablitas va a tener un ID cierto porque ra ya sabemos que las crea automáticamente de forma serial no todas nuestras tablas les va a poner un un ID una primary key de tipo serial y para los edificios vamos a colocar vamos a hacer simple vamos a colocar un nombre
+48:01
+
+para el edificio todos los edificios ti el nombre no Doña Sofía don Simón don Juanito no sé usualmente el escorial tienen no sé tod en todas las ciudades casi hay un edificio Centenario cierto etcétera consistorial También hay en varias ciudades eh Y le vamos a colocar una dirección dirección sí dirección y creo que con eso la dirección y tal vez la ciudad una ciud para diferenciarlos un poquito entre uno y otro y para los departamentos vamos a necesitar un ID vamos a necesitar el número del departamento o y vamos a no vamos
+48:55
+
+a no no no nos vamos ir mucho en el detalle del departamento solo me interesa la parte de las relaciónes pero acá eh dijimos que había una relación entre edificio y departamento no una relación de uno a muchos por lo tanto un departamento pertenece a un edificio cierto entonces Cómo podemos establecer eso en nuestra en nuestro diagrama en nuestra base de datos un puntito hacia de un puntito de departamento hacia edificio una flecha con una flechita Pero además que tiene que existir en la tabla ah Ah exactamente una llave foránea no Por
+49:30
+
+lo tanto Aquí vamos a poner una llave foránea una fk y Aquí vamos a colocar edificio edificio it que sería el ID del edificio No Y ahí tendríamos Entonces ahora podemos colocar es many Yo quiero One many Ahí vamos a colocar entonces uno a muchos cierto ahí tenemos nuestra primera relación y eh acá vamos a tener en facilities vamos a tener un ID y vamos a tener acá el nombre de la de la característica que sería piscina kincho etcétera Y la verdad es que eso es lo que necesitamos No necesitamos más cierto ahí nombre no es más necesario ahora dijimos
+50:30
+
+que aquí había una relación de muchos a muchos cierto porque efectivamente un edificio puede tener muchas facilities puede tener piscina quincho áreas verdes estacionamiento Pero hay varios edificios que van a contar con esas o esas características cierto más de un edificio puede tener piscina más de un edificio puede tener estacionamiento y así por lo tanto se genera una relación de muchos a muchos y tenemos que usar una tabla intermedia en esta tabla intermedia vamos a De todas formas dejar el ID vamos a trabajar con el has sabemos que
+51:00
+
+el has no genera un ID pero lo vamos a dejar ahí por si acaso y esta le vamos a colocar entonces edificios facilities que sería la tabla entonces que va almacenar la relación entre los edificios y las facilities para poder establecer Esto entonces vamos a colocar básicamente dos identificadores que pueden o no foráneas pero lo vamos a dejar establecido como llaves foráneas ahí y a uno le vamos a colocar que va a ser la llave fuer del edificio edificio ID cierto y el otro que va a ser el facilities ID y sabemos entonces que las eh vamos a
+51:52
+
+colocar Aquí no más y acá para acá Ah siempre queda ya importa y eh Y eh tenemos otra que va de acá hacia acá ya ahí tenemos entonces nuestra nuestro diagrama en este caso un diagrama lógico no vamos a hacer el físico porque las restricciones y esas cosas se encargan ustedes de agregarlas pero para en virtud del tiempo la vamos dejar en el L ya pero aquí ya entendemos entonces nuestro dime ahí quedó entonces edificio es uno a muchos con edificio facility Claro porque las relaciones recuerden cuando resolvemos una relación de mucho
+52:56
+
+a mucho se genera una tabla intermedia Y esa relación de mucho a mucho se divide en dos relaciones de uno a muchos donde el lado de los muchos siempre está por el lado de la tabla intermedia se acuerdan de eso okay s eh Ya Y probablemente vamos a necesitar que eso vamos a ver si Lo alcanzamos a hacer probablemente les van a pedir también Algún sistema de roles algún sistema de eh autenticación de usuarios por lo tanto por aquí vamos a dejar una tablita por ahora ahora si media etérea para ver si que alcanzamos de usuario
+53:29
+
+users cierto aquí usualmente va nombre correo email password y rol Exactamente no y ahí ser un cierto s eso Entonces vamos con lo básico chicos vamos con con lo que ya tenemos acá vamos a establecer primero esta parte del ejercicio vamos a partir con la parte central Porque la idea es que en virtud del tiempo sabemos que sabemos que tenemos solamente 6 horas bueno Y en este caso tenemos tenemos 2 horas para resolver un ejercicio
+54:32
+
+eh Hay que hacerlo más o menos rápido y tenemos que ir avanzando cierto y esto es una recomendación que yo les voy a dar ahora como tenemos el tiempo en contra chicos y una de las eh condiciones para que ustedes se les evalúe el examen es que una vez que el evaluador reciba ese examen y lo haga correr instal en su computador cierto y lo enciende el servidor agarré el s el la aplicación debe correr debe funcionar No debe aparecer algún error extraño que haga que el servidor se caiga cierto o que no corran las migraciones o que algo pase que no
+55:13
+
+funcione por lo tanto La idea es ir desarrollando o lo que yo Les recomiendo es ir desarrollando en bloques pero en bloques funcionales Entonces vamos a partir por lo general vamos a hacer primero lo de edificios y depart entos cosa de que tengamos cierto la parte de edificios y la parte de departamentos de la mejor forma posible pero que eso funcione y después les vamos a agregar los otros elementos a medida que vamos avanzando pero asegurándonos de que vayan funcionando a medida de que vamos avanzando cosa que no nos topemos con o
+55:43
+
+no se tope con algún problema el evaluador y nos eh No nos de la posibilidad de corrección no tenemos que asegurarnos eso antes de eso cortito lo que hicimos ahora me confundo es el modelo lógico o el físico lógico el físico Recuerda que trae todo el detalle adicional de eh tipo de datos restricciones no Ah para que sea modelo físico aquí yo tendría que decir que el nombre en este caso va a ser un barar cierto con algún máximo 150 y va a ser not nul Y eso cierto aquí y ahí ya empezaría a ser un modelo físico pero por ahora virud del tiempo
+56:34
+
+vamos a dejarlo solamente con el lógico el modelo físico ahí lo terminan ustedes ejercicio les tocó resolver ustedes en el examen cómo se llamaba er de turismo agencia de turismo bien est muy difícil por algo estamos acá muy largo profe muy largo lo encontré yo puede ser puede ser ya démosle entonces chicos vamos a ir a nuestro terminal y vamos a empezar a trabajar con cierto vamos a generar Entonces esta primera parte vamos a empezar con lo esta relación que sería edificios y departamentos ya para tener en el fondo la parte principal del
+57:22
+
+proyecto que esa es de hecho la parte principal del proyecto para eso también nos sirve diagramar no para entender Cuáles son los elementos principales porque claro podríamos tener los usuarios pero si no tenemos los edificios la lista de edificio y la lista de departamento La verdad es que no tenemos aplicación podríamos tener las características solas pero si no tenemos los edificios los departamentos no hay aplicación entonces la parte central de esta aplicación es la posibilidad de eh manipular y listar tanto los edificios como los
+57:48
+
+departamentos cierto ya teniendo entendiendo eso podemos empezar Ya a programar Y eso es un buen análisis para hacer cuando se genera cualquier proyecto chicos no solamente para para el examen no por dónde partir es lo principal eh Ya Cómo podemos entonces generar o representar estas tablitas en nuestro proyecto de rails de los modelos podemos generar los modelos cierto podemos generar los modelos pero ya que tenemos que hacer una aplicación full stack eso es lo que se nos solicita cierto También aparte de los modelos tenemos que hacer los
+58:30
+
+controladores y las vistas Entonces qué nos conviene en este caso sabiendo que nos vamos a imaginar que nos piden la posibilidad de poder Eh no solamente listar los edificio sino también poder crear edificios nuevos que yo pueda agregar nuevos edificios a la aplicación que pueda editar esos edificios En caso de que me equivoque y en caso de que como es una inmobiliara pierda por ejemplo la concesión o la posibilidad de arrendar departamento dentro de ese edificio eliminar los edificios entonces Exacto cierto en este
+59:01
+
+caso que tenemos un crud completo vamos a hacer un crud completo tanto para eh edificios como departamentos nos conviene claramente hacer un scaffold no que es una herramienta de rails que nos permite hacer de forma automática digamos esta esa parte y se encarga solito ra de hacerlo que es una de las grandes virtudes que tiene este este framework no el famoso scaf Entonces vamos a necesitar CR se acuerda lo que significa CR create read update delete crear y leer actualizar eliminar cierto son las acciones en el fondo que
+59:35
+
+nosotros podamos hacer con la información dentro de nuestra aplicación ya eh Como necesitamos haer completo nos conviene scff Entonces vamos a utilizar el comando rails G que es el generador de rails cierto nos permite generar varias cosas nos permite generar e controladores modelos migraciones ent otras cosas pero tamb también nos permite generar un scaffold rc scaffold y vamos a ocupar vamos a hacer el primero cuál por cuál me conviene a partir de estos dos chicos por edificios o departamentos podría partir por
+01:00:13
+
+departamentos por ejemplo s no no edificio Exactamente lo podemos partir por departamentos porque esta es una entidad débil que depende de otra entidad no Acá hay una llave foránea si yo no tengo el edificio ID cierto no me conviene partir por esta pero si no tengo los edificios no tengo A qué hacer a qué tabla hacer referencia no me conviene partir por esta tabla cierto me conviene partir por esta que es como las la la principal es como la la entidad fuerte no la entidad principal entonces efectivamente me conviene partir por edificios vamos a
+01:00:50
+
+partir por el scaffold de edificios pero e Hay un problema no sé si recuerdan rail tiene un problemita con los idiomas no sé si les explicaron eso les explicaron esos chicos el problema que tiene con está hecho para el inglés entonces si nosotros utilizamos palabra en español se va a complicar Y por qué se complica porque tiene una particularidades Exacto por las reglas gramaticales por ocupa porque ocupa dos dos formas de escribir la cosa cierto primero la palabra el nombre en el fondo del modelo siempre va a ir en singular
+01:01:35
+
+cierto el modelo se se llamaría edificio en este caso pero tanto la tabla como los controladores y la carpeta de las vistas por lo tanto se van las va a pasar a plural Entonces se llamarían edificios pero Esas reglas gramaticales no son iguales para el inglés o para el español cierto reglas del plural en el fondo no son iguales para todos los idiomas en este caso trabajo con Esas reglas gramaticales para solamente para el inglés por lo tanto es muy probable que si nosotros ocupamos palabr en español no pueda hacer bien esa
+01:02:08
+
+traducción gramatical o ese paso gramatical cierto esa transformación de singular a plural y nos veamos en problemas porque después no va a poder encontrar o hacer la relación entre los modelos y los controlador o entre los controlador y la pista y etcétera o las rutas y ahí se nos va a generar un desorden entonces Les recomiendo trabajar siempre con los nombres de las tablas en inglés tanto de los scaffold de los modelos de los controladores pero que no sé si lo explicaron hay una forma de bypasear eso en rails esa forma de
+01:02:37
+
+pasearla es a través de las inflexiones que están aquí dentro de la carpeta config Hay una carpeta que se llama initializers y dentro de esa carpeta Hay una carpetita que se llama inflections o sea un archivo Perdón que se llama inflections rb donde vamos a encontrar este Loop cierto que está acá y nosotros podemos eh vamos a dejar comentado des comentado que me interesa n más nosotros podemos ocupar este pequeño metodo que es el infle irregular punto irregular para poder establecer excepciones o traducciones traducciones gramaticales
+01:03:18
+
+específicas que nosotros necesitemos aquí vemos por ejemplo una inflexión que es del inglés que rompe un poquito con la regla de la s para los no que es person y people nosotros podríamos hacer lo mismo ahora si quisiéramos por ejemplo con edificios edificio edificio edificios Entonces si nosotros dejamos establecido eso acá en esta en este archivo nos vamos a asegurar de que aunque nosotros lo creamos en español haga bien la traducción de El singular de edificio al singular de al plural de edificios y lo mismo si queremos para eh
+01:03:56
+
+si después vamos a hacer departamento e ahí departamento cierto departamentos y aquí Podemos agregar en el fondo todas las que nosotros queremos agregar todos los nombres de modelos y de controler que nosotros queramos agregar en nuestra aplicación no sé si lo sabían pero también les va a servir por si quieren trabajar con nombres de modelos o nombres de scaffold en español ya está bueno ya eh entonces E eso eh Ya vamos a aprovechar de ya que estamos acá cierto vamos a ocupar edificios o sea departamentos tenemos características y usuarios
+01:04:47
+
+no eh acá característica usuario entonces así le podemos poner nombre en español a nuestros modelitos y va a funcionar bien no vamos a tener ese problema del del paso del plural singular porque me parece por ejemplo Que si hay un ejemplo super típico que es el de las categorías si ustedes no hacen esto usted estuvieran trabajando con por ejemplo una aplicación con productos y categorías Y ustedes no hacen esta inflexión rails Va a traducir categoría al plural como categori no sé si les ha pasado lo intentaron hacer pero es como el típico
+01:05:38
+
+ejemplo cuando uno hacer una aplicación con producto de categoría categoría lo pasa a categori y ahí que embarrar que las tablas quedan mal nombre pero bueno ya sabem ya saben ahora có va pasear en el fondo esa traducción que hace que hace no y pueden trabajar de ahora en adelante con nombres en español cosa que es bacán buenísimo buenísimo y fíjense que también pueden hacerlo con reex cierto con expresiones regulares si se manejan con expresiones regulares pueden establecer una regla general para el español etcétera eso lo
+01:06:13
+
+pueden buscar también si s pero eh es más fácil hacerlo con el irregular porque ustedes van colocando así como específicamente como quieren que se traduzca Ya ahora tienen que guardarlo cierto si es que tenían como es esta carpeta está dentro de o este archivo está dentro de la carpeta config y dentro de la carpeta initializers este archivo se carga cuando nosotros iniciamos un proyecto de rails cuando se carga cuando se carga con el servidor Por ejemplo si ustedes ya tenían el servidor andando con rails s rails s
+01:06:45
+
+carga todos esos initializer incluyendo las infecciones cierto para poder Mostrar por lo tanto si ustedes hacen e una modificación a la inflexión y después tratan de hacer o generar un un nuevo modelo o un nuevo scaffold mientras el servidor está andando les va a salir error tienen que bajar el servidor cierto guardar esto y ahí ya les va a funcionar todo bien ya Recuerden que siempre todo lo que está acers queda como Prado si es que está o ahí medio congelado si es que está el servidor andando s Entonces ya teniendo eso vamos
+01:07:22
+
+con el primer scaffold scaffold eh edificio y edificio necesitamos eh nombre dirección ciudad c nombre dirección eh ciudad todos estos en este caso son strings cierto sabemos que el String es el el tipo de dato que viene por defecto por lo tanto no hay que agregarle ahí nada solamente los nombres de las e columnas no y ahí estamos okay le damos enter Aquí está generando cierto el escf fíjense que ya estamos seguros que la traducción lo hizo bien porque tenemos el edificios controller de todas formas vamos a ir a e revisar siempre es bueno
+01:08:13
+
+revisar chicos vamos a ir aquí a los controllers tenemos nuestro edificios controller bien traducido dentro del modelo tenemos nuestro modelo edificio en singular Perfecto hast ahí cierto tenemos nuestra carpeta edificios eh las rutas que es lo otro importante tenemos nuestras recursos para edificios entonces funcionó bien el initializer O sea la inflexión cierto las inflexiones funcionaron bien y nos hizo bien la traducción del singular al plural en español s podemos seguir trabajando e vamos entonces con la otra parte
+01:08:50
+
+importante que es la del departamento la otra tabla principal de este proyecto no que aquí vamos encontrar una relación Entonces vamos a generar vamos a usar también scaffold para generar esta porque también necesitamos la posibilidad de poder crear departamentos listar todos los departamentos que tenemos para administrar entre comillas eh o editarlos o eliminarlos ya también necesitamos un CR para departamento entonces también vamos a usar un scaff ra sca eh departamento y departamento necesitamos el número Qué tipo de datos me conviene
+01:09:29
+
+para el número chicos nos conviene el String lo dejamos definidos como un integer que qué nos conviene qué creen que nos conviene podría ser un Stream Porque algunos eh direcciones tienen letr Exacto cierto ya all hay que empezar a valerse por las eh lo que se conocen como las reglas de la vida real no sabemos que existen departamentos con número por ejemplo yo estoy en el 205 Pero hay departamentos hay edificios que son 300 y tanto a o incluso hay departamentos que tienen los los departamentos tienen letras cierto
+01:10:11
+
+el departamento a b c d e f ya para que esta aplicación no funcione para cualquier tipo de edificio tenga letra o no tenga letra o tenga algún símbolo como departamento cierto nos conviene dejarlo como un stre no y y ya que tenemos creado la tabla de edificios podríamos generar al tiro la llave foránea cierto por lo tanto para poder generar la llave foránea tenemos que indicarle que aquí vamos a hacer una referencia a edificios cierto edicio references no con el edificio references rail va a entender que esto es una
+01:10:54
+
+referencia al modelo edificio y por lo tanto vamos a revisar ahora la migración nos va a permitir eh o nos va a crear la llave foránea de forma inmediata enter Ahí sí vamos a hacerlo vamos a revisar que eh si si hizo bien la traducción ahí tenemos los recursos de departamentos controler departamentos y está todo bien Sí está todo bien Vamos a chequear De todas formas cierto aquí tenemos ya las pistas para departamentos departamentos controller superb ahí tenemos departamentos departamento ya bien cierto y aquí debe desaparecer si
+01:11:36
+
+vamos aquí abajito ahí tenemos el edificio ID perfecto y vamos entonces también a chequear las rutas ahí están las rutas y vamos a chequear las migraciones Siempre antes de lanzar las migraciones vamos a revisar Entonces se va a crear la tabla de edificios que es lo que le estamos solicitando cierto todavía no se ha creado porque no hemos lanzado la migración lo tenemos solamente acá en nuestro proyecto de rais pero no en la tabla en nuestra base de datos aún pero se va a crear la tabla de edificios con una columna que se llama nombre
+01:12:06
+
+dirección ciudad y los timestamps que sabemos que lo genera rails automáticamente e lo que es la la migración de departamentos aquí tenemos se va crear la tabla de departamentos superb con eh una columna número de tipo String y aquí tenemos cierto la columna que generar la referencia a edificio necesitamos que sea sí todos los departamentos deben pertenecer a un edificio por lo tanto este null fse está correcto cierto debiese eh tener la característica de no nulo Esa esa esta columna debíamos tener siempre Eh Al momento de crear un departamento
+01:12:47
+
+indicarle A qué edificio pertenece Y que va a ser de tipo llave foránea esta columna cierto y teniendo estas dos cositas para poder seguir avanzando y poder seguir trabajando y poder lanzar nuestra aplicación o hacer partir el servidor vamos entonces a lanzar la migración para llevar desde nuestra aplicación hasta la base de datos estas tablas nuevas cierto y para eso vamos a ocupar El Comando rails tb rails tb migrate super pasaron ambas migraciones cierto e y eso quiere decir que vamos bien voy voy a abrir de to De todas formas do TR
+01:13:35
+
+no esto es vamos abrir pg admin De todas formas para asegurarnos de que están las las tablitas ahí mostrarles siempre es bueno chicos que también ahí tengan a manito pg admin para que puedan estar chequeando si está todo bien o de vier cualquiera de las dos que hanyan utilizado o cualquiera de las dos que les guste más ambas funcionan bien bueno Esto se demora así que por mientras eh Ya teniendo las migraciones podemos lanzar nuestro servidor s vamos a lanzarlo para empezar a trabajar y aquí Entonces vamos acá este se llama
+01:14:26
+
+edificios development esquemas tablas aquí tenemos las dos tablita cierto tanto la tablita edificios em Ahí está cierto con nombre dirección ciudad y nuestra tablita departamentos con nombre y el edificio ID que sería la llave forar s hasta el momento vamos s bienvenido ahí a a los chicos que se incorporando recién chicos e bueno empezamos hace un ratito ya pero estamos generando una aplicación e con elementos que se solicitan usualmente dentro de lo que es un examen de talento digital cierto eh está basada Un ejemplo muy típico que es base a
+01:15:15
+
+edificios y departamentos ya una especie de aplicación para administrar edificio y departamento ya entonces lo que generamos hasta el momento es e reconocimos ahí lo lo principal las entidades principales de nuestra de lo que se está solicitando no tenemos edificios departamentos y características en este caso lo pusimos en español al final características eh Y aquí encontramos que tenemos una relación uno a muchos y una relación de muchos a muchos entre edificios y características las características serían para los que
+01:15:49
+
+están llegando recién si el edificio tiene estacionamiento parque áreas verdes p p juegos infantiles etcétera Ah se genera una relación mucho a muchos que resolvimos con una tabla intermedia y quea flotando por acá solita una tabla de usuarios que usualmente se pide ya si alguien tiene alguna duda por favor no dude en levantar la manito o activar el micrófono y consultar lo que sí que mantengan el micrófono sinencio para que no se genere eco Ángel escuch puedes tu micrófono por
+01:16:55
+
+para que no se genere eco no me deja sil Ah que me conect por el computador est por ya vale vale vale dale muchas gracias vamos entonces profesor Disculpe dime es que ten una pregunta Dale Dime lo que pasa es que bueno Esto usted lo va a compartir después esta clase quedando grabad ya profe graci entonces interrumpo volver pero gracias Dale Eh me perdí entonces que estamos Ah ya vamos ya tenemos entonces nuestra tabla así revisamos post que ahí está en creada cierto vamos bien Si queremos después revisar si los datos están
+01:17:52
+
+pasando también es otra forma de revisarlo eh viendo aquí en en postgress eh ahí lanzamos el servidor por lo tanto vamos a ir acá cierto allá iniciar el proyecto y vamos a ver que cuando lanzamos el proyecto por supuesto recibimos acá el logo de rails pero si vamos acá a edificios vamos a ver que tenemos ya entonces cierto eh la paginita que genera el scaffold con el link para poder generar un nuevo edificio y ya podemos entonces eh eh utilizar el crud cierto dentro nuestra aplicación de la forma más básica que es la que genera el scaffold
+01:18:37
+
+pero ya está No si vamos a departamentos Ahí están los departamentos y fíjense que podemos crear un nuevo departamento y indicar A qué edificio pertenece el departamento en este caso en base al ID del edificio Y eso es lo primero que vamos a ir a modificar ya vamos a hacer alguna modificaciones acá para que quede un poquito más decente Eh entonces para que esto vaya mejorando de forma rápida vamos a hacer lo siguiente chicos eh Espérame ya eh vamos a ir entonces primero vamos a ir a nuestra aplicación y vamos a establecer una ruta raíz cierto Cosa que
+01:19:40
+
+cuando lleguemos a la raíz del del proyecto no nos aparezca el logo de rails porque ya ahí sería eh ahí ya partimos mal Cierto No tenem una ruta raíz no no nos suma muchos puntos vamos a ir entonces a nuestro archivo de rutas eh cer acá Acá está archo de rutas y vamos a establecer una ruta raíz para el proyecto que en este caso vamos a dejar como ruta raíz el listado general de edificios por lo tanto vamos a eh vamos a comentar esta que es la que tiene la ruta ra cierto el rot y vamos a ocupar edificios Index como ruta raíz ahí está cosa que
+01:20:25
+
+podamos ver ahí el listado general de edificios en nuestro proyecto como ruta raiz e Por qué Porque creo que es la entidad más importante del proyecto por lo tanto es una buena elección como como como raíz no llegar y ver inmediatamente el listado edificios que tenemos por supuesto que podríamos generar una específica como una landing page pero por ahora vamos a dejar est eh chicos recordatorios si ustedes no se acuerdan de las rutas vamos a abrir aquí otra otra pestañita ahí existen algunos comandos que a me permiten revisar las rutas cierto
+01:21:13
+
+específicamente El Comando rails RS si yo escribo rails RS que significa rutas r y le doy enter me va a mostrar todas las rutas que contienen mi proyecto actualmente cierto de esta forma vamos a agrandar un poquito más para que se vea más bonito ahí ahí tenemos todas las rutinas cierto el prefijo cierto que sería como el e como el alias cierto de mi ruta con el que yo puedo usar los helpers A qué controller Y a qué acción está aunta cierto esa ruta y el tipo de ruta que estoy utilizando que puede ser de tipo
+01:21:53
+
+get post put Patch delete y cuál es la la Uri no O la URL eh tenemos ese Comando no sé si lo conocían pero ahí está Tenemos también variaciones de ese Comando que no son super útiles en el fondo cuando nosotros queremos realizar algunas pruebas o se nos olvida o queremos revisar rápidamente las rutas si que están funcionando ra rout eh routs tiene la variación también de formato con el guion e mayúscula en donde les va a mostrar de esta forma las ruta es otra forma de verlas ya por si acaso pero vienen primero listadas en con numerito
+01:22:30
+
+y la misma información pero en formato vertical cierto de arriba se va ahí está el prefijo el verbo la Uri y los controles un poquito más ordenada depende ahí lo que les guste más pueden ocupar este esta banderita o no Y la otra es que también podemos ver las rutas específicas de un controlador rails r espacio gu C indicando que queremos ver solamente la de un controller vamos a ver entonces solamente las rutas de edificios y Aquí vamos a ver solamente esas rutas ya que también cuando ya tenemos un proyecto más o menos grande
+01:23:08
+
+vamos a tener muchas muchas rutas por lo tanto si solamente hacemos rail routes va a ser un listado gigante y esto nos permite acotar un poquito más la búsqueda de las rutas y poder eh ir las revisando en este caso Les comento esto porque tenemos aquí cierto estos helpers de rails que generan estos recursos específicos o estas rutas específicas cierto para en este caso el scaffold de edificios pero este resource genera siempre estas mismas rutas que sería el Index el create el New el edit el show los update y el destroy cierto se me va a generar
+01:23:47
+
+una ruta tipo get edificios post edificios un edificios New y así la gener automátic iamente porque sabe que eso es lo que genera el el el scaffold No pero si nosotros quisiéramos generar algunas o o quitar algunas generar algunas un poquito más específic también lo podemos hacer y las podemos revisar acá si es que están funcionando bien para no tener que ir al archivo de rutinas Bueno no sé si conocían esos comandos pero también les van a servir ahí en caso de que necesitan debugar Y tenemos la consola también que también
+01:24:27
+
+Les recomiendo que la aprendan usar alto el rail c porque aquí podemos hacer consul tias rápidas y ver cómo está funcionando nuestra aplicación ya lo vamos a ver ya vamos a hacer lo siguiente vamos a crear nuestro primer edificio para asegurarnos que esto está bien sando consulta en la en la prueba se va poder hacer o se no no no se puede ocupar siemp que se puede ocupar nuestro primer edificio Y ya teniendo nuestro primer edificio Ahí está podríamos eventualmente nuestro primer departamento cierto el número
+01:25:31
+
+101 para el edificio un ya aquí viene la cosa como yo sé cómo podemos ocupar las consultas de ra en este caso cierto si quisiera ver todos los edificios que tengo listados o que tengo en la base de datos no tengo la vista para hacerlo cierto o quiero re chequear en el fondo sin tener que lanzar el servidor puedo ocupar los modelos de rails los modelos de mi aplicación en este caso edificio cierto edificio y los métodos si hago edificio all me va a mostrar todos los edificios que yo tengo actualmente en la base de datos
+01:26:13
+
+no esto lo transforma ya sabemos que lo que hace active record es transformar rails o sea Ruby Perdón en en sql no por lo tanto aquí estamos viendo ese proceso eh tal cual estamos tomando eh un objeto y un método de Ruby y lo transforma cierto en un Select en una sentencia de cql y nos muestra Entonces el resultado de esa sentencia en formato de eh arreglo cierto un arreglo de objetos Ahí está eh aquí podemos ver que tenemos el id1 cierto por lo tanto vamos a generar este nuevo departamento apuntando a ese edificio
+01:27:06
+
+ahí tenemos nuestro Prim departamento lo mismo departamento ahí está el primer departamento y puedo hacer búsquedas o ir haciendo consulta un poquito más específico cierto edificio Si tuviera varios si quiero ver el primer ocupar el método First va traer el primer edificio el método Last me trae el último si quiero buscar por ID podría ser by cierto y me va a traer el que corresponde Y si coloco ID que no está vve un nil no que no no lo encuent perfecto Solamente vamos de repaso para que vayan recordando también ahí
+01:28:05
+
+e herramientas que les pueden servir Al momento de desarrollar no para ir haciendo consulta y no perder tiempo en lanzar el servidor Navegar hasta la página buscar cosas por allá sino que es mucho más rápido trabajar en la consola ya ya vamos entonces a mejorar un poquito el tiro el aspecto visual cosa que es importante en una aplicación vamos a hac muy simple vamos a trabajar con eh bootstrap vamos a instalar Bo hay varias formas de instalar Boost en un proyecto de rail cierto vamos a ocupar la más simple que es a través del cdn en virtud
+01:28:45
+
+del tiempo Les recomiendo ustedes que ustedes también lo hagan en el examen estás está bien ocupar el cdn cierto en un proyecto pequeñito no no no tiene nada de malo chicos por si acaso eh Por supuesto que lo podemos instalar de forma directa podemos descargar los archivos también podemos instalarlo con import map podemos instalarlo con is build con las gemas en el fondo que nos pone rails a disposición pero está super bien ocupar el el cdn sobre todo para proyectos rápidos y cuando están con el tiempo o les apremia el tiempo cierto como el
+01:29:16
+
+caso del examen En este caso vamos a copiar Entonces el link directamente des de bootstrap para el css de bootstrap Y dónde tendría que agregar el cdn de bootstrap chicos en mi proyecto de ra se acuerdan en el application application de la vista no en el controller en el application de las vistas que está en la careta en layout Y tenemos el application.html.
+01:29:50
+
+erb exact Y esto es la estructura de cualquier página html cierto por lo tanto dentro del Head dentro de la etiqueta Head y específicamente lo Podemos agregar vamos a agregarlo acá antes del Style cheat link cierto que sería esta esta etiqueta sería la que nos lleva al css propio de nuestra aplicación no al que nosotros podríamos escribir Dónde se encuentra el archivo o la parte css de nuestro eh de nuestra aplicación de rails recuerdan a qué hace referencia este archivo application recuerdan donde pueden manipular el css de su aplicación de
+01:30:34
+
+rails sty El asset Ah en asset cierto en asset van a encontrar y aquí hay una carpetita Style cheats y aquí tenemos el css de la aplicación ya acá Aquí tenemos los dos elementos requ el self por lo tanto ustedes podrían escribir directamente css acá y tienen la posibilidad también de crear otros archivos css y de generan otro e cierto y hacen algún elemento acá Este requir 3 hace que lo lea inmediatamente sin que ustedes tengan que hacer nada adicional pueden crear otro archivo cierto pueden dividir sus cs en varios
+01:31:18
+
+archivos como sea necesario y el require Tree se va a encargar de ir a buscar todo es es todo es sss y cargarlo en la página ya e s pequeño repasito entonces eh Como siempre cierto vamos a dejar nuestro css propio debajito de eh los cdn que puedan traer css cosa que mande un poquito cierto siguiendo la regla de la cascada mande el css nuestro se nos haga más fácil la manipulación entonces colocamos el link de bootstrap justo encima de El Style cheet link eh que es el que lee cierto el css en nuestra aplicación
+01:32:01
+
+eh dígame influye que esté encima o bajo del del application sí influye porque dependiendo de cómo cargue O qué es lo que estés cargando o cómo tengas construida la aplicación y otros elementos también como el javascript finalmente rails lo que hace es transformar todo esto en en html finalmente cierto e puede que si Tú tienes tu css antes eh sea sobreescrito por lo que viene con boostrap Ah entiendo porque css sigue la regla de la cascada y el html también se lee de arriba hacia abajo cierto Entonces te conviene tenerlo de abajito
+01:32:39
+
+gracias vale eh Ya y nos falta también el javascript de bootstrap que vamos a copiar aquí tanto poper como bootstrap para que nos funcionen los elementos que necesitan javascript de bootstrap y lo copiamos acá acá tal como lo hacemos en cualquier proyecto de html Simple cierto lo copiamos aquí al final del Body Ahí está Le di un poquito de espacio para que se Entonces vamos a ver debiese ya haber algunos cambios fíjense que esto es lo normal si le damos refrescar acá ya cambió la Fuente cambiaron los espaciados Eso quiere decir que
+01:33:14
+
+efectivamente ya estamos utilizando bootstrap y podemos utilizar boostrap Entonces vamos a darle un poquito de forma chicos e para para este tipo de proyectos rápido y y no se los digo en el fondo eh Para que gener algo mediocre o algo que que no sea de calidad sino que porque efectivamente en este tipo de proyecto apremia el tiempo cierto una especie de prueba pero hay varias varios elementos de boostrap que a mí me permiten Mostrar la información de forma bonita de forma elegante de forma ordenada y que no me
+01:33:54
+
+toman mucho tiempo utilizar cierto esos elementos usualmente son dos tanto las tablas como e las tarjetas y precisamente eso es lo que yo Les recomiendo utilizar en un en un examen cierto o tablas o tarjeta por ejemplo si yo voy aquí al listado de departamentos veo que eh el listado de departamento en este caso tengo uno solo pero e vamos a agregar otro cierto New departamento vamos a agregar el 102 también para el edificio un eh aquí ya se empieza a ver no no muy bien cierto ya se empieza como a ver rara la información no se ve muy legible
+01:34:35
+
+un poquito enredado muchos links etcétera entonces aquí me conviene distribuir la información de una forma un poquito más ordenada lo mismo en edificios si voy generando edificios que este tiene más información todavía va a quedar un poquito más desordenado aún por lo tanto vamos a ocupar bootstrap y vamos a aprovechar que bootstrap nos da una forma rapidita de hacer tablas cierto Entonces vamos a poner esa información al menos la parte de la la parte del Index cierto la vista Index vamos aquí a ir a las vistas
+01:35:15
+
+ya el Index de edificio que es el que nos muestra todos todos todos los edificios en este caso que tengamos en nuestra aplicación itos e lo vamos a mostrar en formato de tabla ya eh Entonces vamos a hacer algunas modificaciones acá vamos a e ya que estamos ocupando bstrap vamos aquí a agregar algo para el título en este caso eh vamos a agregar una clase vamos a agregarle un poquito de margen arriba y abajo m5 y 5 vamos a centrarlo Tex Center y con esto ya debemos tener el título centrado y ya tenemos un poquito
+01:36:09
+
+de espacio cierto en nuestra página qué es lo que deberíamos agregar al tiro también para hacer más fácil la navegación y no no tener que estar escribiendo acá departamentos cada vez que queramos ir a departamento o edificio o la ruta general vamos a agregar una barra de navegación cierto vamos a agregar vamos a dejar en standby un segundo la tablita Pero como me voy a estar moviendo entre varias vistas prefiero hacerlo esto al tiro vamos a agregar una barra de navegación vamos a ir entonces a los componentes de
+01:36:39
+
+boostrap en la sección de nabar vamos a ir a buscar una una nbar que nos acomode yo casi siempre utilizo una simplecast est es más más simple Entonces vamos a ir ahora como la n tiene que aparecer en todas las vistas chicos o deb aparecer en todas las vistas dónde me conviene agregar una na en el application de la vista ig porque se aplica a todos Enton vamos crear aquí una nueva carpetita ex vamos a crear una carpeta vamos a crear un parcial que se html Aquí vamos a copiar nuestra barra de navegación y vamos a ir
+01:37:39
+
+a al application para invocarla antes de modificarla la vamos a invocar acá vamos a llamar aquí antes del Body cierto para que apca siempre arriba del contenido o sea antes del y perdón para Que aparezca siempre arriba del contenido y Aquí vamos a ocupar las etiquetas cierto para mostrar elementos en la página que serían la etiqueta con el igual de rb y vamos a renderizar vamos hacer render Vamos a renderizar parcial que está guardado en la carpeta Cher Slash y se llama cons l l Ahí está si revisamos ahí está nuestra
+01:38:30
+
+Barrita de navegación le vamos a echar una manito de gato igual eh qué podemos hacer vamos a poner un poquito de color distinto ya vamos a ponerle color vamos a ocupar ahí una Barrita negra entonces vamos aquí a ir a nuestra nabar vamos aquí a colocarle edicios o el nombre del proyecto básicamente Ahí va eh En vez de veg Body terciari le vamos a colocar veg Dark no este es veg Dark y vamos a agregar el Data creo que era ahí tenemos entonces una Barrita oscura esto chicos va sacado directamente de la documentación de bootstrap
+01:39:31
+
+cierto Nada más que cambiar las clases para ir cambiando los colores por supuesto ustedes pueden agregar ahí un color que les guste a ustedes pero yo me voy a guar solamente con los de de e s y vamos a agregar entonces también los los links les parece vamos a agregar los links para en este caso necesitamos solamente dos links podamos agregar si el Home lo vamos a dejar vamos a cerrer este vamos a llevar vamos vamos llevar La Barrita hacia la derecha por acá le voy a quitar container para dejar los márgenes
+01:40:37
+
+los márgenes cierto vamos aplicar después también en la página aquí home edificios y departamentos vamos hacer con los mejor con los de rails entonces aquí vamos hacer un cierto este Debería ser el link a y esto nos va a llevar al Root cierto aquí chicos que un repasito pero vamos a ocupar losers directamente sabemos que Root ocupar este helper porque acá y revisamos AC Si volvemos y revisamos nuestros nuestra rtitas de todo el proyecto acá Aquí tenemos la ruta de ra cierto de
+01:41:49
+
+tipo y tenemos que el prefijo se llama Root por lo tanto lo podemos ocupar como de alias cierto jto con el helper pad Root pad nos lleva Entonces al a la ruta raíz en vez de colocar directamente el nombre de la ruta podemos ocupar los helpers de rails no basado en los prefijos que tiene cada uno de los de las rutas que se genera se acuerdan de eso chicos cierto aparte del Root pad le vamos a dar un poquito de Ah tenemos que el formato de rails cierto en este caso respetar las clases tenemos la clase link primeraa
+01:42:54
+
+y vamos tomar esta ya tenemos tres este sería entonces a edificios y este no debiese llevar al vamos a ver las rutas de nuevo creo que era edificio SP mal no recuerdo acá Prix edificios por lo tanto si le decimos que nos lleve al p de edificios p Recuerden que significa camino en inglés p a Entonces si le decimos que nos lleve al edificios p al camino a edificios nos va a llevar a esta ruta al sl edificios Y esa ruta nos lleva a este a esta acción y a este controlador cierto entonces en vez de root sería edificios SP Y en este caso
+01:43:58
+
+solamente con la clase link Y si la Ah copiar esta aquí y me faltaría la de departamentos departamento SP tenemos Entonces ya la posibilidad de Navegar al menos entre nuestras vistas de el listado de edificios y el listado de departamento y podemos Volver al Home con home ya aparece un poquito más aplicación cierto nos vamos tener entonces a mantener Perdón en la vista de edificios y vamos a seguir trabajando en el ind de edifici y vamos a hacer la tablita que les había comentado ocupar acá las tablas deotra para poder
+01:44:55
+
+generar o mostrar en el fondo el listado completo de edificios cierto para eso estructura básica de una tabla en html etiqueta tabla cada tabla tiene sus headers su Body cierto y en cada sección los rows las filas de la tabla no esta sería una fila un Row un TR aquí tenemos un TR significa Table Row th Table header cierto TD significa Table Data no entonces aquí van los datitos de la tabla eso es lo mismo que vamos a hacer Pero eh iterando para que salga más rápido no tengamos que lo ha automático rais entonces
+01:45:46
+
+e busquemos vamos a ver H Acá está vamos a modificar qué podríamos hacer primero como es una aplicación de administración podríamos Mostrar aparte de todos los edificios podríamos Mostrar un poquito de información adicional e Como por ejemplo podríamos colocar acá vamos a mover aquí necesitamos mover algunas cositas primero es ese New edificio lo vamos a sacar de ahí este link y lo vamos a colocar en un lugar más bonito o donde calce mejor Mejor dicho Entonces vamos aquí a crear un dip vamos a crear vamos a crear tiro
+01:46:39
+
+algo con una fila justify chicos hay cosas que me voy a soltar un poquito pero si tienen alguna duda me avisan sobre todo lo que es bootstrap Aquí vamos a crear una filita vamos a crear dos columnas cierto para mostrar la información en este vamos a mostrar simplemente un elemento que nos diga vamos a Contamos con un total de por ahora vamos a colocar x edificios una aplicación sería entretenido que nos muestre aplicación Cuántos edificios tenemos en total para administrar eso ya lo vamos a ver cómo lo vamos a manejar y
+01:47:31
+
+e vamos a colocar otro call eh con un link que diga eh En verdad aquí vamos a colocar este link de acá abajo colar este de acá sacamos de acá lo colocamos aquí y le ponemos un poquito de formato estamos bura le ponemos btn Entonces vamos a ver ya Contamos con un total de edificios está bien pero ya vamos a volver aquí un poquito al application html para hacerla corta chicos esto a lo mejor no siempre es lo más
+01:48:36
+
+e no siempre es lo mejor o lo más óptimo pero vamos a envolver el yel en la clase container de boostrap cierto para darle esos márgenes en a toda la básicamente ya ahí sí ahí sí ahí tenemos los márgenes que siempre son importantes chicos como descanso visual cierto lo que es la parte del diseño de la aplicación y e r que se vaya bien hacia el ladito Ah est cierto tenemos nuevo edificio y ahí
+01:49:42
+
+vamos a ver ya Cómo podríamos hacer que la aplicación nos muestre automáticamente Cuántos edificios tenemos chicos qué tendríamos que hacer tendríamos que cargar los registros desde la base datos y usar el comando count ahí debería mostrarte todos los que está podríamos ocupar un Y eso lo podríamos hacer cierto directamente en la vista podríamos aquí hacer e eh edificio e claro edificio.
+01:50:31
+
+com o Buscar ahí la forma de mostrar cuánto difícil tenemos pero aquí no es lo ideal cierto no es lo ideal utilizar consultas directas ocupar los modelos acá sino que tenemos la posibilidad de hacer esas consultas Dónde dónde lo no lo correcto porque está bien si lo hacemos acá chicos no es que esté mal pero dónde lo eh el lugar donde mejor Debi colocar nosotros la lógica del negocio en nuestra aplicación en qué controlador en los controladores va la lógica eh va la parte que nosotros o sea la lógica para mostrar la información
+01:51:06
+
+cierto la que se encarga de ir a buscar o llevar la información pero la lógica de negocio que se conoce como que es en el fondo si yo quisiera por ejemplo hacer un cálculo de precio antes de mostrar por ejemplo pasar de peso a Uf antes de mostrar la página o métodos que hayan con relación a lo que es la lógica usualmente van en los modelos chicos ya Entonces por ejemplo aquí nosotros podríamos hacer lo que se llama un scope cierto podríamos hacer un scope que es básicamente una consulta una consulta específica y podríamos
+01:51:35
+
+aquí decirle que queremos hacer una consulta que se llame total edificios cierto y Aquí vamos a ocupar precisamente el método count a edificios cierto y aquí entiende que tiene que hacer un count a edificio porque estamos dentro del modelo edificio por lo tanto si ahora nosotros ocupamos por ejemplo e Si volvemos a nuestra vista cierto y ocupamos este helper o este método que acabamos de generar y aquí básicamente mostramos @ total edificios inicios que no le puse de edificios vamos a ver porque no me carga
+01:53:09
+
+ahí porque ahora sí tengo que ir al control ya tengo el método acá cierto acá tengo el método que va a mostrar el total una el total de edificios y ahora voy al controller me sal un pasito voy al controller y acá vamos a ver que e aparte cierto de que quiero que muestre todos los edificios guardados en esta variable no vamos a crear la variable total edificios y Esto va a ser igual a en este caso edificio y aquí hago la consulta edifio punto total edificios cierto este total edificio de acá viene de este scope o esta consulta este este
+01:53:53
+
+Método en el fondo de clase que yo creé acá en el modelo y aquí está la lógica cto como es un es simplemente un count queda en una sola línea si la lógica fuera más más compleja un cálculo o un proceso un procedimiento más complejo sería un método más largo no pero básicamente es la misma idea y se genera entonces un método de clase y lo llamo directamente con la clase lo guardo en esta variable y ahora lo puedo llamar entonces en la vist y al llamarlo entonces la vista Ahora nos dice que tenemos un total de un
+01:54:27
+
+edificios ya por si les pen ahí un scope de usualmente les van a pedir contar Cuántos usuarios tienen etcétera ahí tienen la posibilidad de generar una consultita de forma correcta entre comillas insisto porque de la otra forma igual funciona pero esta es como la la forma ordenada siguiendo las buenas prácticas el fondo eh Ya tenemos la posibilidad esto vamos con la tablita Entonces vamos a e crear la entonces para crear aquí la tablita tenemos que hacer modificaciones vamos a dejar esto aquí por ahora vamos a e
+01:55:15
+
+crear tabla eh e no y vamos a colocar también ya aquí vamos a colocar que no se junte y aquí tenemos la tablita cierto dentro de la tabla dijimos que necesitábamos un Head un t eh con en este caso tenemos nombre necesitamos el ID le pondremos el ID o no vamos a poner vamos a ver que en la tabla aquí tenemos el nombre la dirección y la ciudad vamos a colocar el id para poder diferenciar un poquito el edificio Porque pueden haber edificios
+01:56:17
+
+que se llamen igual vamos a colocar el ID vamos a colocar el nombre la dirección y la ciudad no el ID el nombre colocar el ID el nombre y la dirección la ciudad la ciudad bajar para los detalles para poder tener algo distinto los detalles Entonces vamos a necesitar ID nombre dirección y acciones eventual nombre direc cu ID nombre dirección th Entonces el primer sería el título cierto los son los títulos de la estos de acá de la tablita sería el ID luego tenemos el nombre luego tenemos dirección y luego tenemos acciones dentro lo que es el
+01:57:18
+
+body Body vamos hacer lo siguiente Aquí vamos a pasar entonces esto de acá iteración la vamos a mostrar dentro del Body vamos a edificio esto locar entonces dentro de la iteración vamos a mostrar que por cada edificio Enton muestre una nueva fila de la tabla nuo t con los siguientes datos sería el ID nombre dirección acciones por 4 entonces en el primer Data edicio el
+01:58:26
+
+edificio edificio punto nombre el segundo el edificio punto dirección el tercero las acciones debiese Mostrar las acciones me refiero a este link que dice show edificio lo vamos a mostrar aquí en las acciones cierto y este sería edificio pun Alo sino que sería un link to Ah que sería el link to que tenemos lo borré lo borré sería un link to e le podríamos colocar detalles cierto para que se entienda aquí que vamos a ver los detalles y e que nos lleve al edificio a la ruta para el edificio y le podemos poner de botón
+01:59:23
+
+puntos sl btn btn sm y esto debería queer entonces así y ahí ya se ve mejor la información cierto y con esto al menos para el examen ya están mostrando cierto una capacidad de utilización de boostrap capacidad de poder Mostrar la información como corresponde o de forma ordenada cierto y una comprensión y un entendimiento de cómo manipular en el fondo las vistas de Race ya y fíjense que de manera relativamente simple ya no s si lo habían visto Así o se les había ocurrido hacerlo así en la vez anterior pero es una buena forma de mostrarlo
+02:00:23
+
+por temas de tiempo obviamente va a mostrar este ejempl no más pero para departamentos debiese ser lo mismo no para que podamos alcan más cositas si voy a quar la vista de departamentos el Index debiese quedar Algo similar para mostrar los departamentos dí ir sumando la tabla de hecho podemos ver vamos aquí volver aquí edificios voy a sacar esto que ya no lo estoy ocupando podemos ver vamos a ir acá a crear un nuevo edificio vamos a crear el e eh a ver voy a poner rcado pero r no existe Santiago ya ahí tenemos Si volvemos ahí
+02:01:30
+
+tenemos al tiro el otro edificio ahí se va a ir colocando va a aparecer van a aparecer Cuántos edificios tengamos nosotros en la base de datos lo mismo el conteo también se actualizó ven ahora tenemos un total de dos edificios para que se vea un poquito más a lo mejor podríamos eh ya ahí e bien cierto bien bien bien ya aparece aplicación no está empezando a aparecer aplicación eh lo mismo debemos siamos los detalles esto también debiese verse más bonito cierto y debemos ver y aquí tendríamos que empezar a preocuparnos
+02:02:25
+
+de el funcionamiento de la app en Sí porque por ejemplo hasta ahora cualquier persona que entre podría editar un edificio o eliminar un edificio eso no debiese suceder cierto solamente personal autorizado debiese poder hacer ese tipo de acciones e personas comunes y corrientes debiesen llegar hasta cierto punto No más de la aplicación no eso lo vamos a trabajar ahora con device lo que voy a hacer antes es que si ahora yo voy al New departamento todavía estoy generando los departamentos en base al ID del edificio
+02:02:59
+
+y eso me genera una dificultad Al momento de generar los edificios porque tendría que ir a ver primero hoy quiero generar imagínense que tengo un listado de ya de 200 edificios ya necesito para el edificio don Simón chuta Cuál es el edificio don Simón tengo que venir al listado del edificio buscar cuál es el ID del edificio don Simón volver a departamento y ahí colocar recién el ID no me conviene eso es lento se transformaría en una aplicación un poco tediosa Entonces esto lo podemos mejorar no y lo podemos mejorar
+02:03:30
+
+e modificando un poquito el formulario cierto el formulario de este departamento para que nos muestre no solamente o sea para que este campo no sea un campo donde nosotros tenemos que agregar un ID sino que sea un campo donde nos muestre un listado de todos los o todos los edificios en este caso que nosotros tenemos a disposición y nosotros simplemente tengamos que seleccionar el edificio al cual queramos generarle un nuevo departamento cierto vamos a modificar Entonces esto para hacer más fácil la vida de los
+02:04:08
+
+usuarios vamos a modificar esa vista Entonces vamos a ir aquí a al formulario de departamentos y esta es Estas son las líneas en cuestión no estas líneas entonces representan estas sección del formulario esta de acá por lo tanto vamos a modificarlo un poquito vamos a e vamos bjar acá en vez de ocupar un text Field vamos a ocupar un helper esto viene desde la documentación chicos nada que estoy nada que inventé yo aquí vamos a action View helpers eh No esto es em action form helpers ahí sí en los formularios tenemos una opción que es el
+02:05:00
+
+el helper que se llama Collection Select que me permite o que me genera en el fondo una etiqueta de tipo Select con todas las opciones que yo esté trayendo desde eh un modelo no Entonces vamos a ocupar esa opción para eh Y la estoy sacando directamente de la documentación ojo fíjense que aquí está para eh trabajar esta parte Entonces vamos aquí a hacer un en ve de un textfield insisto un collect eh eh Collection Select para cierto el campo de edificio ID y Aquí vamos a pasar e en este caso aquí no es necesario que
+02:05:49
+
+pase el objeto en Sí cierto la clase en porque nosotros ya la tenemos precargadas los controllers cierto y voy aquí a Ah si voy a departamentos en el control departamento precargar ya podríamos hacer dos cositas chicos para que se V entend podríamos pasar efectivamente edificio eso me traería todos los edificios y aquí le pongo ID nombre y esto Dee Mostrarme entonces un listado aquí me salió edificio quedó mal escrito parece edo Gracias edici Ah ahí entonces fíjense que efectivamente me trae la colección de
+02:06:51
+
+edifici que tenemos hasta el momento o sea me va a mostrar todos los edificios que tengamos en la base de datos en este caso solamente el Doña Juanita y el consistorial son los dos que tenemos pero esto lo podemos escribir un poquito más bonito ya un poquito mejor e Entonces vamos a hacer lo siguiente Porque la idea es que no no tener consultas directamente en la vista ya esto si un aserto no está mal se puede hacer mejor para hacerlo Mejor vamos a ir al controlador de departamentos y vamos a hacer lo siguiente
+02:07:22
+
+vamos a ir aquí a los métodos privados que son los que están al fondo al final y vamos a crear un método que se llame consulta edificios que se va a encargar de básicamente eso de cargar la consulta con todos los edificios que tengamos disponibles y vamos a cargarlos en una variable que se llame edificios eh Y esto ser igual a edificio siqueros podemos ordenar cierto order alfabético nombre aco por orden alfabético y si lo tenemos acá abajo este método por s solo aquí no hace mucho cierto sino que tenemos que indicarle dónde queremos
+02:08:22
+
+ocupar este método vamos a ir entonces acá arriba y vamos aar un before action vamos a decir que antes de una acción en específica vamos a requerir el método consultar edificios consulta edificios y lo vamos a utilizar en este caso solo para este consulta edificios lo voy a necesitar para lo quiero para el show para el show sí lo voy a necesitar para el show para mostrar a qué edificio le pertenece el departamento Así que está bien lo voy a necesitar para el formulario del New para el formulario edit y para Elo lo va a necesitar para esos
+02:09:20
+
+elementos Entonces qué qué hace este action chicos Recuerden invoca el fondo este método que generamos acá abajo el consulta edificios y lo invoca antes before action antes de que se genere alguna de estas acciones Recuerden que una acción Es simplemente uno de los métodos que tengamos dentro de El controlador por lo tanto antes de cargar el show o antes de que cargue la página del show va a cargar esta consulta va a venir ya el show con esos datos cargados Lo mismo para el formulario New la vista New que es la del formulario o la vista edit o
+02:09:55
+
+los métodos en cuestión ya para qué nos sirve esto para poder hacer un poquito más amena nuestra vista porque esta consulta es pequeñita pero eventualmente podríamos generar consultas más complejas y ahí la vista se vería desordenada y creé que las consultas crecen rápido e entonces aquí simplemente podemos colocar edificios que es la variable donde estamos guardando la consulta es la que está acá cierto te actualizamos e edificio Ah me quedó mal escrito de nuevo apla aplauso para mí me estoy comiendo ahí ahí está y ahí está y fíjese que ahora
+02:10:39
+
+además aparecen en orden alfabético la sexta primero que la d antes aparecía primero el Doña Juanita Ahí estamos mostrando la información cierto que requería y ahora cuando creamos un departamento vamos a crear un departamento en este caso por consistorial crear el el 100 consistorial no tenía departamento le vamos a dar create y fíjense que se crea este nuevo departamento para el edificio en cuestión el edificio con el id2 que era el consistorial cierto y ahí está y ahí ya tenemos cierto un formulario mucho más acorde a lo que
+02:11:17
+
+debiese ser una aplicación ya mucho más fácil de usar no tenemos que ir por para el otro eh la experiencia de usuario ya empezó a mejorar o mejoró considerablemente s eh cómo vamos hasta acá chicos a mí me explotó la cabeza explotó la cabeza alguna duda consulta dentro de esa explosión me alumbró muchas cosas que me estaba acostando hacer pero estamos bien lequ así que ahí lo tengo para empar mejor Recuerda que queda grabada la la o sea esto igual va a quedar grabad ito y les van a mandar el link con la grabación el lunes
+02:12:06
+
+seguramente eh Ya sigamos qué es lo que más qué otra cosa importante ten nuestra aplicación aquí ya insisto no me voy a ir mucho en el detalle de la de las vistas porque ya les puse un ejemplo acá Este ejemplo debiese replicarse aquí también pero eso ya queda para ustedes porque nos queda poquito ya 35 minutos Entonces abarcar un poquito más qué otra cosa importante chicos para los que están desde el comienzo sobre todo que la tiene un poquito más clara porque alcanzaron a ver esta parte qué otra cosa importante
+02:12:38
+
+debemos ver acá o le gustaría ver la parte de los usuarios o la parte de la relación mucho a mucho los usuarios complicado que el otro mucho mucho s por lo menos veces ya Eh bueno entonces para poder establecer usuarios y hacer estea Ya empezar a hacer un poquito de filtro de quién puede ver qué cosa no permitir que cualquiera en el fondo elimine edificio o edite edificios eh cómo lo podríamos hacer chicos cl tenemos que cargar ahí un tenemos que hacer un sistema donde podamos entregarle ese poder a alguien en específico a una persona un usuario No
+02:13:35
+
+tendríamos que armar una tablita para usuarios pero cómo nos conviene armarla chicos había una Había algo que nos permitía hacer eso de forma casi mágica más rápida se acuerdan una gemita que se llama device acuerdan de device sí vamos ocar device dev vamos a ir a la documentación de device que está acá se la voy a dejar en el chat siempre tengan a mano estas documentaciones cuando ustedes empiecen su proyecto chicos su su su prueba su examen ustedes deberían tener cargadas todas estas páginas antes de empezar
+02:14:21
+
+ru ra.org donde está la documentación de rails Ruby langang donde está la documentación de de Ruby la página de device porque la van a ocupar si ustedes tienen pensado utilizar otra Gema debiesen tener cargada esa documentación también para que tengan a mano ahí Cómo se utiliza y en caso que les salga unn problema tengan a mano también cómo resolverlo la documentación de bura por supuesto y todo lo que ustedes tien necesario que puedan necesitar para su para su proyecto no Entonces vamos a agregar vamos a agregar device al
+02:15:03
+
+proyecto vamos a hacerlo con b device que no solamente va a ir a escribir la Gema device a nuestro G file sino que también va a ser el B install cierto inmediatamente una especie de combo este como no agrega agrega device jf y lo instala entonces fíjense que instaló las gemas necesarias para que funcione device que es lo primero que nos pedía la documentación no aquí la sección Getting started de hecho se las voy a dejar linkada aquí está para que lleg más rápido mejor ahí está lo primero que teníamos que hacer
+02:15:50
+
+era agregar device y luego tenemos que utilizar el generador para instalar device en nuestro proyecto qué es lo que va a hacer esa instalación va a agregar un archivo que se llama device rb en la configuración va Entonces vamos a con rail g device install le damos enter y aquí hizo la instalación y nos da algunas recomendaciones fíjense que creó dos archivos el device rev en la carpeta config initializers que Recuerden que es nuestra carpeta eh la carpeta donde va toda la configuración e que se carga al inicializar o al al
+02:16:34
+
+encender el servidor cuando ustedes hacen partir su proyecto cierto eh donde vimos también las inflexiones ahí mismo eh se genera este archivo de device rb donde cuenta con la la configuración básica en el fondo para ocupar device Ya esa es una de las cosas que instala y lo otro que instala es e lo otro está acá lo otro que instala es en locales e todos los mensajitos en inglés en este caso cierto que eh entrega device Como por ejemplo has iniciado sesión has cerrado sesión exitosamente etcétera ya eso es lo que
+02:17:21
+
+agre device e una vez que instalado vamos a revisar aquí nuevo nos da algunas recomendaciones Como por ejemplo eso ya lo tenemos eh acá que necesitamos tener una ruta raíz ya la tenemos eh que Podemos agregar alguna de estos elementos al application html para poder recibir esos mensajes iniciaste sesión satisfactoriamente cerraste sesión etcétera eh les voy a mostrar un pequeño tip también con eso e ya si ustedes agregan este vamos a agregar el que dice notice vamos a tomarlo de acá lo vamos a copiar vamos a Aquí vamos a ir Entonces nos dice que lo
+02:18:09
+
+peguemos en el application.html.erb tenemos nuestra barra de navegación La idea es que salga debajito de entre la barra de navegación y el contenido ya que el mensaje no aparezca sobre la barra de navegación porque se vería horrible no deb aparecer ahí el problema chicos que si lo dejamos acá y vamos a cargar no va a salir nada porque no el servidor ya si ahí fíjense que al hacerlo bueno no se notó ahora pero acá se genera un pequeño espacio que a veces molesta un poquito porque tenemos una etiqueta p que está
+02:18:53
+
+invisible Pero sigue siendo una etiqueta p Al fin y al cabo que ocupa espacio ya entonces para que esto no ocurra podemos envolver esto etiqueta p en un pequeño condicional diciendo que si existe un notice eh muestra es etiqueta pes Y eso va a hac que no se genere ahí un espacio un espacio si es necesario que a veces molesta y cuesta empezar a encuadrar un poquito las páginas como nosotros queremos ya eso chicos Entonces ya tenemos el notice Cosa que cuando iniciemos sesión aparezca eh si si vamos ya tenemos instalado device
+02:19:46
+
+eh lo que nos faltaría por hacer en este caso es eh generar un modelo cierto con device que es el modelo que va a guardar en este caso los usuarios cierto y que vamos a poder ocupar nosotros para darle esta calidad de de roles y un poquito trabajar la seguridad cierto de nuestra de nuestra aplicación vamos entonces a hacer eso sería esta tabla de acá esta tabla no tiene relación con ninguna otra cierto porque aquí no tenemos relaciones los edificios No pertenecen al usuario los departamentos tampoco simplemente
+02:20:40
+
+una tabla independiente pero que nos va a servir para entregarle seguridad a nuestra aplicación no vamos a generar la esa con lo que nos dice la documentación tenemos que hacer ra device y colocarle nombre al modelo que en este caso sería usuarios lo vamos a hacer en español recuerden porque ya configuramos los initializers y creo que puse también usuario usuario usuarios por lo tanto no vamos a tener problema con el nombre en español Entonces vamos con la creación de este nuevo modelo de device que sería ra device
+02:21:21
+
+ya y usuario debiese tener nombre email password y roll cierto sabemos que el email y el password lo trae device por defecto viene con esas con esas columnas cierto que es lo principal que necesita para funcionar un email y un un password pero tendríamos que agregar Entonces el nombre y el rol vamos a agregar Entonces el nombre y el rol necesitamos entonces una columna nombre una columna rol que sea de tipo interior le vamos a dar s generó vamos a revisar vamos a ir a nuestros a nuestras migraciones Ahí está vemos entonces que se va a generar la
+02:22:16
+
+tabla usuarios en plural también con una columna email columna para el password los las columnas para guardar los tokens para el reseteo acá tenemos el nombre y el rol La idea es que el rol se genere de forma automática una vez que generemos un usuario cierto y vamos a darle la posibilidad de eso Entonces directamente acá ya e cuál debiese ser el rol de forma automática que tengan todo los usuarios Al momento de crearse El que tenga más permisos o el que tenga menos permisos cuando se crea un usuario debiese ser al tiro como el el
+02:23:04
+
+administrador maestro o el usuario con menos permiso la primera vez debería queer un administrador y después todo el resto Debería ser solamente usuarios normales que no tengan mayores privilegios primera la primera Exacto pero como esto lo vamos a generar para que todos tengan ahí su rol vamos a dejar que como default se creen con el rol cero ya que va a ser el que tenga la menor cantidad de privilegio Por supuesto que para el primer usuario nosotros lo vamos a modificar pero para si uno crea un usuario debiese ser el que se genera o
+02:23:41
+
+sea de ahí de ahí en adelante todos esos usuarios debiese ser el que tenga menos privilegio que va a ser el que tengan el rol cero Entonces le vamos a agregar ahí default cer a la columna rol para que cada vez que generemos un usuario se cree con ese rol ahí ya con eso podemos hacer correr la migración y que se genere la tabla que se gener la tabla cierto para que empezamos ya a poder crear nuestro usuario ya tenemos acá edificios Entonces si nosotros ahora
+02:24:46
+
+vamos a usuarios sl vamos a ver que device cre inmediatamente las vistas necesarias para que yo pueda hacer login o para poder hacer el Sign up básicamente cierto para que pueda hacer eh ahí tenemos el formulario cierto pero en este formulario solamente Podemos agregar el email y el password nosotros tenemos nombre y rol debemos también dar la posibilidad de que el usuario pueda colocar su nombre cierto Cómo podemos
+02:25:48
+
+modificar entonces una vista de device se acuerdan para poder agregar esos elementos que faltan al formulario si nosotros vamos a las vistas ahora así como lo tenemos como lo generamos hasta el momento vamos a ver que dentro de las vista solamente seguimos teniendo departamentos edificios el layout y el ch donde tenemos aquí la nabar cierto pero no tenemos una vista que nos permita modificar los usuarios no o las vistas de los usuarios las vistas en este caso de los formularios para usuarios por lo tanto tenemos que instalarlas si
+02:26:24
+
+vamos acá a la a la información de device cierto vamos a ver que bajamos un poquito más acá abajo quemos configurar las vistas y modificarlas cierto necesitamos hacer el comando rails generate device views que nos va a instalar entonces las vistas asociadas a nuestro device entonces podemos hacer eso podemos hacer también en formato de scope O sea si queremos tenemos varios device para distintos entidades eh podemos diferenciarlas agregando el nombre que corresponda ya en este caso lo vamos a hacer de la forma básica
+02:27:18
+
+Entonces vamos a ir acá y vamos a agregar las vist de nuestro device eh rails device eh vi y eh eso va a generar la carpeta vista cierto todas las vistas de device que vamos a lanzar nuevamente al servidor que las vamos a encontrar Entonces ahora acá en la carpeta device Y si quisiéramos modificar Entonces por ejemplo esta vista que es la que tiene el Sign deos ir a la carpeta registration que dond están en el fondo las vistas para registrarse tenemos que la vista View New Perdón donde se hace el login perd ha el y
+02:28:21
+
+e tenemos la vista edit donde se pueden editar en el fondo los usuarios van a poder editar sus elementos pero acá en registrations New es este formulario el Sign y acá y en sessions New es el login por si acaso si quieren Modificar el login esto lo podemos ver porque aquí si modificamos acá cierto y vamos al login vemos Que efectivamente Ahora sí podemos modificar las vistas y ya darle formato agregarle bootstrap hacer que se vea más bonita y también modificar los campos cierto que es lo que estamos buscando por ahora nos vamos a ir a lo
+02:29:09
+
+funcional nos interesa modificar los campos no los campos en este caso para poder hacer Sign up es decir Agregar un nuevo usuario con todos los con todos los Campos necesarios ser el nombre email Entonces vamos a ir a la carpeta device registration y en el New vamos a agregar aquí un campito copiar cer y vamos a ocupar un Tex en este caso va a ser para el nombre entonces este campo va ser para el nombre chicos saben para sirve el autofocus
+02:30:22
+
+para que se Centre en qué sentido el O sea al abrir la página se posiciona el cursor en ese campo exactamente Ese autofocus es cuando ustedes ingresan y fíjense que el cursor aparece listo y en el nombre que ustedes puedan empezar a escribir n más y lo tengan que hacer clic en el en el campo muy bien muy bien entonces ya tenemos el campo nombre y podríamos podríamos ya solamente habiendo agregado el campo nombre agregar un usuario y se guarda su nombre o nos falta se acuerdan si falta algo no sé si se hizo la migración o no
+02:31:05
+
+hicimos la migración el rol es por defecto el rol es por defecto Así que no tenemos que agregar rol acá porque se va a crear solito La idea es que se cree solo adás para no tener problemas de seguridad e sio cualquiera se había que no había que pasarle el campo al controlador el campo al controlador cierto tenemos que agregar los parámetros no para que efectivamente esté permitido agregar ese parámetro a la base de datos no lo que sí antes de eso vamos a copiar aquí el nombre y lo vamos a agregar también en la edición cosa que la gente pueda
+02:31:41
+
+editar su nombre en caso de que se equivoque no ahí está lo agregamos también a la Ed y le quitamos al Focus acá s Entonces vamos a agregar los parámetros del controlador hay varias formas de agregar esos parámetros al controlador Y en este caso si queremos hacer solamente esa modificación y no tenemos modificaciones lógica o modificaciones de que sea necesario en el fondo e utilizar los controladores específicamente los controladores de device cierto vamos a ocupar una forma que se llama de no que lo di as sino que
+02:32:22
+
+es lo que que dice mis cierto y no es que sea signif la forma floja cierto pero no es que sea flojo por flojera sino que es la forma rápida y que está bien de todas la forma rápida porque en verdad no es necesario crear o solicitar ra que instal los controladores porque así como instalamos las vistas también podríamos Instalar los controladores ya pero no es necesario porque generar código por código dentro de la aplicación por generar código si que no lo vamos a utilizar no tiene sentido aumentar la cantidad de código si es que no lo vamos
+02:33:01
+
+a utilizar no tiene absolutamente ningún sentido entonces device nos da esta forma que es de laway la forma fácil la forma floja digamos En donde podemos hacer esta configuración pero directamente en el application controller sin la necesidad de instalar todos los controladores de device Entonces vamos ir a la application controller y si se fijan no sé si se habían dado cuenta chicos Pero como esto vamos a volver a la arquitectura no de eh de rails modelo vista controller cada una de las partes de de rails siempre va
+02:33:35
+
+a tener su application algo el application controller el application record el en el caso de las vistas tenemos el application.html.erb y todos los archivos que se LL application De hecho si vamos al javascript tenemos el application js si vamos al assets tenemos el application.css todos los archivos dentro de rails que se llamen application afectan a toda la aplicación por eso se llaman application entonces cualquier cosa que nosotros grabemos o cualquier código que nosotros escribamos en estas en estos archivos que se llaman
+02:34:10
+
+application van a afectar absolutamente toda la aplicación a todas las partes Ya por lo tanto en este caso que sobre todo que es una aplicación relativamente pequeña it donde usualmente el device va a afectar a toda la aplicación está bien que lo hagamos acá en el application controller no está mal ya ya vamos al application controller y nos dice que tenemos que agregar lo siguiente tenemos que agregar un before action lo podemos copiar directamente desde acá de hecho podemos copiar Solamente vamos a copiar esto lo vamos a
+02:34:47
+
+agregar vamos agregar for action y vamos a agregar entonces este método protegido vamos a agregar aquí y vamos a hacer algunas modificaciones en este caso vamos a agregar vamos a agregar entonces que para el también nos acepte el siguiente campo que en este caso sería el campo nombre el campo cosa que lo podamos modificar a través del formulario con eso ya podemos empezar a generar usuari desde la aplicación desde desde el Front de la aplicación y también esto deos agregarlo porque este es para para el cierto pero
+02:35:40
+
+también debemos agregarlo para la actualización porque tenemos la vista que también Ahora tiene nombre y la vista de en device se llama account update se usa con el helper account update hacer exactamente lo mismo aquí abajito pero en vez de Sign up Sería para el accounts y con eso ya tenemos la posibilidad en el fondo de e agregar datos para esos Campos desde el frontend de la aplicación desde digamos desde acá cierto desde el formulario Eh sí sí ahí estamos bien entonces fíjense ahora eh que reiniciar por las moscas
+02:37:06
+
+eh vamos a actualizar acá y ahora ya vamos a crear entonces un nuevo usuario eh nombre vamos a colar mi correo cierto vamos y fíjense que se genera entonces y se crea se crea esta nueva sesión para este nuevo usuario y además ya aparte del Sign up se hace también el Sign ya estamos entonces e con nuestro usuario ya implementado que en este caso e es de tipo con un rol cero cierto un usuario básico normal pero ya está implementado y ahora tenemos que empezar a trabajar en la parte de cómo trabajar estos roles cierto tenemos al menos en la parte base
+02:38:09
+
+la base que sería nuestra tabla Ya está ya tenemos el elemento que nos va a permitir hacer eso que sería la columna rol Entonces vamos a hacer la configuración para que es ya vamos a ir entonces tenendo eso listo vamos a ir a nuestro modelo de usuario está acá y vamos a agregar Entonces los roles cierto que pueden tener eso eso lo vamos a hacer ya que tenemos la columna roll que es de tipo integer vamos a ocupar un elemento que se llama para la columna Roll en donde vamos a agregar aquí un arreglo con un arreglo con los tipos de roles
+02:39:04
+
+que yo voy a querer cierto Y fíjense por qué se ocupa como arreglo vamos a colocar que voy a querer un arreglo usuario voy a hacer antes de esto voy a comentarlo acá un segundito vamos a ir a la consola vamos vamos a ver entonces usuarios usuario Ah entonces F que tengo acá efectivamente el listado de mi usuario que Acabo de crear con el ID un el email no aparece pero está el nombre y el rol rol cero cierto porque le dijimos que por defecto tenía que partir con ese rol cero vamos a ir a modificar ese rol Pero antes
+02:40:06
+
+tenemos que determinar Cuáles van a ser los roles Entonces ahora vamos a volver a encender esto y vamos a decir que los roles van a ser rol de tipo usuario rol de tipo y rol de tipo ad cierto vamos a tener tres roles Entonces esto es un arreglo no los arreglos comienzan desde el número cero por lo tanto el rol cer va a ser usuario el rol un va a ser conserje y el rol dos va a ser Al momento de agregar el en fíjense que va ocurrir algo interesante yo recargo acá eh Y reviso nuevamente aquí el usuario pun all fíjense que ahora en vez de que
+02:40:57
+
+me aparezca rol cero aparece rol usuario se dan cuenta entonces lo que hace en este caso el enum Que bueno hay que revisar después la documentación porque esto llega hasta ra 7 ra 8 cambia un poquito Hay que hacerlo con con un Hash eh pero va tomando entonces esos números y los va a reemplazar pores lo que nosotros tenemos en este arreglo si es el rol cero va a ser usuario el rol uno va a ser conserge el rol dos va a ser qué es lo que vamos a hacer ahora entonces vamos a e ya que tenemos los roles definidos vamos a hacer e una
+02:41:39
+
+actualización tenemos en este caso un usuario tenemos los usuarios cierto eh vamos a hacer una actualización de ese usuario de ese primer usu usuario usuario First e lo vamos a actualizar update y vamos a actualizar en este caso el rol a e ver si esto funciona no entonces el rol va ir a 01 2 a porque le puse rol sin e Ah entonces actualizamos el rol a usuario fíjense que el rol se actualizó a dos ya al valor dos y esto porque estamos trabajando con el Entonces como
+02:42:44
+
+pasa primero por o sea por por Ruby va a buscar dice qué significa admin el admin significa que es el rol que está en la posición dos y la consulta finalmente hace modificando hace el update y hace la modificación del rol al valor dos Ahí está cierto Entonces ahora sí vamos a ver ese usuario nuevamente vamos a ver que ahora tiene el rol de admin ya y ya lo podemos dejar definido con administrador ya tenemos un admin todos los usuarios que se generon de ahora en adelante van a ser e simplemente usuarios pero ya tenemos
+02:43:24
+
+ese entonces cuál es la idea que no todo se pueda ver e si es que eres usuario no hay algunos permisos que tienen que ser específicos para los admin y otros para los usuarios entonces chicos vamos a ir a hacer algo mucho tiempo pero que los deje bien encaminados para lo que tengan que hacer después vamos a e primero vamos a definir que e por ejemplo tenemos
+02:44:41
+
+algunos helpers de device cierto que nos van a ayudar a hacer la autenticación bastante más simple y que yo pueda efectivamente ingresar o no a algunas secciones Como por ejemplo yo podría indicarle que solamente los usuarios de tipo admin puedan acceder tanto las vistas de El o los usuarios registrados básicamente cierto por ahora los registrados puedan acceder solamente a las vistas New edit y puedan acceder también a los a las acciones create update y destroy O sea que solamente puedan ellos eliminar o modificar esos datitos
+02:45:31
+
+entonces para eso tenemos el helper de device usamos action para que vayan recordando tenemos este helper que se llama authenticate usuario cierto seguido por el nombre del modelo en este caso es usuario y si yo si yo hago esto y lo guardo acá y Cierro la sesión en este caso no tengo como acepto de esta forma vamos a cerrar aquí esto con esto deberíamos cerrar sesión ahí fíjense que ahora si yo intento Navegar me va a pedir automáticamente hacer login si intento ir a edificios edificios independiente que vaya a través
+02:46:35
+
+de la ruta directa no me va a dejar me va a pedir necesariamente que yo haga login cierto que está bien por un lado ahora yo puedo manipular un poquito eso indicándole también que quiero que la autenticación sea solamente para only cto para es porcentaje y Ah solamente para las vistas New Ed y para las acciones Entonces qué va a pasar ahora cierto yo voy a intentar ir a mi ruta raíz y si voy a poder acceder voy a poder acceder a los detalles pero cuando vaya al edit no me va a dejar cierto si yo voy al New no me va a dejar me va Air a hacer login
+02:47:37
+
+ya no estoy autorizado cierto para hacer esas acciones a no ser que me autentique no que yo tenga las credenciales suficientes para poder participar de esa de esas acciones ya y así un poquito como se Ya hay que ir usando divice Por supuesto que en el caso de los roles Ya hay que empezar a trabajar un poquito los roles con Simplemente consistencias condicionales si es que el rol el rol del usuario corresponde a conserge o administrador puedo hacer una cosa si es que corresponde a otro puedo hacer otra cosa y lo puedo ir trabajando en base a
+02:48:16
+
+los casos que me haban solicitado chicos bueno como ustedes saben 3 horas un poquito poco para ver cierto todo todo todo todo lo que hay que alcanzar a ver para porque en el fondo es el repaso del curso completo cierto Entonces se entiende que no hayamos alcanzado a ver absolutamente todo todo todo lo que vimos en varios meses en tres horitas n más pero espero que al menos esto les haya servido para que puedan abordar lo que me interesa a mí es que puedan abordar cierto el el examen de de buena forma y e puedan ir avanzando digamos eh según lo
+02:49:03
+
+que les vayan solicitando y puedan en el fondo tener lo suficiente para que puedan aprobar o sea Ojalá lo mayor posible que puedan aprobar con un si pero que puedan tener toda lo lo suficiente para que puedan ir a hacer una aplicación que funcione y que cumpla con la con lo que se les está solicitando no sé si qua alguna dudita por ahí algún comentario este ejercici este ejercicio tiene algún PDF no pero voy hacer lo siguiente ejercicio yo lo hago siempre mis cl porqueo muy típico el ejercicio de los edificios los
+02:49:47
+
+departamentos que voy a hacer buena onda Vamos a hacer lo siguiente yo tengo este ejercicio resuelto completito entonces lo que les voy a hacer es que les voy a dejar e el link al github de este proyecto Ahí está e creo que les puedo pasar también el enunciado que cre Porque este este es un Este es un ejercicio chicos que ha ido mutando con el tiempo con curso a curso y le hemos ido como sumando cosas en base a lo que van pidiendo algunos compañeros Le vamos quitando cosas vamos modificando entonces voy a ver si les
+02:50:31
+
+puedo traspasar esto también para que lo tengan como a manito no está muy ordenado el el enunciado porque como les digo ha ido cambiando con el tiempo ido mutando con el tiempo pero para que entiendan a qué va en el fondo el desarrollo entonces ahí les dejo en el chat tanto el el repositorio del proyecto como el el archivo con el enunciado entre comillas porque partió chiquitito el enunciado y se ha ido creciendo Y ha ido agregando otras cositas ya prof van a encontrar lo mismo que está acá pero completo de hecho eso está
+02:51:07
+
+con ya con todos los roles eh todas las vistas eh bien hechas con e con la otra con la las características en el fondo cierto y las tablas y las relaciones y todo lo necesario ya así que eso chicos la que Data que no hayamos podido alcanzar a hacer más pero bueno ustedes saben como les comentaba 3 horas para ver lo de 6 meses es como poquito pero ojalá que les haya dejado por lo menos bien encaminado para que sepan Cómo comenzar y cómo abordar el problema que el final es un poquito lo más difícil ya profe con Quién habría
+02:51:45
+
+que conversar por el tema de esta clase que el video el lunes con se los van a mandar a los chat por donde mismos les avisaron que que existía este reforzamiento les van a mandar la grabación de esto Gracias De nada así que eso chicos Hola José no te había visto eh eso alguna duda consultita antes de cerrar Hola profe Hola cómo está José bien bien con las cosas pero todo bien tratando de ver si V lograr ahora que que funcione bien todo vamos que se pueda vamos que se pueda Bueno chicos eh No habiendo consultas no habiendo dudas lo dejamos
+02:52:29
+
+hasta acá er de 9 a 12 cierto Sí ya eh insisto Ojalá que le haya servido e y ojalá que les vaya super bien el repechaje chicos que tienen el próximo vies tienen una semanita para estudiar aprovechen ahí el el repositorio que les envíe Estoy seguro que les va a servir y y nada que les vaya s gustazo un gustazo a los nuevos y un gustazo ver a a los alumnos antiguos también que est superas profe cu vale vamos a tener la grabación entonces

@@ -11,64 +11,79 @@ class State(rx.State):
     ...
 
 
+
+
 def index() -> rx.Component:
     # Welcome Page (Index)
     return rx.container(
         rx.color_mode.button(position="top-right"),
         rx.vstack(
-            rx.heading("Welcome to Reflex!", size="9"),
+            rx.heading("Welcome to Chokmah", size="9"),
             rx.text(
-                "Get started by editing ",
-                rx.code(f"{config.app_name}/{config.app_name}.py"),
+                "ELITE PERFORMANCE SPORTSWEAR!",
                 size="5",
             ),
             rx.link(
-                rx.button("Check out our docs!"),
-                href="https://reflex.dev/docs/getting-started/introduction/",
-                is_external=True,
+                rx.button("Contact us!"),
             ),
             spacing="5",
             justify="center",
             min_height="85vh",
         ),
 
-rx.card(
-    rx.inset(
-         rx.heading("Rash guards"),
-        rx.image(
-            src="/unnamed2.png",
-            width="100%",
-            height="auto",
-        ),
-        side="top",
-        pb="current",
-    ),
-    rx.text(
-        "Reflex is a web framework that allows developers to build their app in pure Python."
-    ),
-    width="25vw",
-),
-rx.card(
-    rx.inset(
-         rx.heading("Shorts"),
-        rx.image(
-            src="/unnamed5.png",
-            width="100%",
-            height="auto",
-        ),
-        side="top",
-        pb="current",
-    ),
-    rx.text(
-        "Reflex is a web framework that allows developers to build their app in pure Python."
-    ),
-    width="25vw",
-)
+        rx.box(
+        rx.vstack(
 
-    ),
+            rx.image(
+                src="/unnamed2.png",
+                width="100%",
+                height="auto",
+            ),
+                side="top",
+                pb="current",
+            ),
 
+            rx.heading(
+                "ELITE PERFORMANCE SPORTSWEAR", 
+                font_size="3em", 
+                color="white", 
+                text_align="center"
+            ),
+            rx.text(
+                "Unleash Your Athletic Potential",
+                font_size="1.5em",
+                color="white",
+                margin_top="10px"
+            ),
+      
+            align="center",
+            justify="center",
+            height="70vh",
+            width="100%",
+            background_image="url('/images/hero_background.jpg')",
+            background_size="cover",
+            background_position="center",
+            background_color="rgba(0,0,0,0.5)",
+            padding="2em",
+        ),
     
-    as_child=True,
+        rx.card(
+            rx.inset(
+                rx.heading("Shorts"),
+                rx.image(
+                    src="/unnamed5.png",
+                    width="100%",
+                    height="auto",
+                ),
+                side="top",
+                pb="current",
+            ),
+            rx.text(
+                "Unleash Your Athletic Potential"
+            ),
+            width="25vw",
+        )
+    )
 
 
 app = rx.App()

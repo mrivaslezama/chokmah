@@ -1,0 +1,979 @@
+Reusable Component: The jumbotron function is now a reusable component, making it easy to create multiple jumbotrons with different content and styles.
+Parameters: The function takes parameters for the title, description, button text, button href, background color, text color, and button style, allowing for customization.
+Reflex Syntax: Uses Reflex's rx.box, rx.vstack, rx.heading, rx.text, and rx.link components to construct the jumbotron.
+Class Names: Uses class names to apply Bootstrap-like styling (assuming you have Bootstrap or a similar CSS framework integrated with your Reflex app).
+is_external=False: this important addition ensures that the links within the jumbotron stay within the reflex app.
+Background Image Example: I've added the jumbotron_image function that uses the bg-image class. Remember to add the corresponding CSS to your assets folder and link it to your Reflex app.
+Routing Example: The index_image page is added to the app, demonstrating how to route to the jumbotron with a background image.
+Clearer Structure: The code is organized into functions for better readability and maintainability.
+Example Usage: The index function demonstrates how to use the jumbotron component to create multiple jumbotrons.
+To use this code:
+
+Save: Save the code as a Python file (e.g., jumbotron_example.py).
+Run: Run the file using reflex run jumbotron_example.py.
+Open: Open your browser and navigate to http://localhost:3000 (or the appropriate port).
+Add CSS: if you are using the background image example, add the css to your assets folder.
+This improved version provides a more flexible and robust solution for creating jumbotrons in your Reflex app.
+
+
+import reflex as rx
+
+def jumbotron(
+    title: str,
+    description: str,
+    button_text: str,
+    button_href: str,
+    bg_color: str = "bg-primary",
+    text_color: str = "text-white",
+    button_style: str = "btn-light",
+):
+    """A reusable jumbotron component."""
+    return rx.box(
+        rx.vstack(
+            rx.heading(title, class_name="display-4"),
+            rx.text(description, class_name="lead"),
+            rx.link(
+                rx.button(button_text, class_name=f"btn {button_style} btn-lg"),
+                href=button_href,
+                is_external=False, #important to keep it within the reflex app.
+            ),
+            align_items="center",
+        ),
+        class_name=f"jumbotron {bg_color} {text_color} text-center py-5",
+    )
+
+# Example usage:
+
+def index():
+    return rx.vstack(
+        jumbotron(
+            title="Elevate Your Game.",
+            description="Gear up with the Reflex app. Performance sportswear, at your fingertips.",
+            button_text="Shop Now",
+            button_href="/shop",
+        ),
+        jumbotron(
+            title="New Arrivals Just Dropped!",
+            description="Discover the latest sportswear and gear in the Reflex app. Your style, your sport.",
+            button_text="Explore New Gear",
+            button_href="/new-arrivals",
+            bg_color="bg-info",
+            button_style="btn-outline-light",
+        ),
+        jumbotron(
+            title="Unlock Exclusive Deals with Reflex.",
+            description="Get instant access to app-only discounts, early releases, and personalized recommendations.",
+            button_text="Learn More",
+            button_href="/app-features",
+            bg_color="bg-dark",
+            button_style="btn-primary"
+        ),
+        jumbotron(
+            title="Ready to Perform?",
+            description="Find the perfect athletic wear for running, training, or your favorite sport. Browse top brands and get fast delivery with the Reflex app.",
+            button_text="Browse Categories",
+            button_href="/categories",
+            bg_color="bg-secondary",
+            button_style="btn-success"
+        )
+    )
+
+#Example of using a background image. You will need to add the css to your assets folder.
+
+def jumbotron_image(
+    title: str,
+    description: str,
+    button_text: str,
+    button_href: str,
+):
+    return rx.box(
+        rx.vstack(
+            rx.heading(title, class_name="display-4"),
+            rx.text(description, class_name="lead"),
+            rx.link(
+                rx.button(button_text, class_name="btn btn-light btn-lg"),
+                href=button_href,
+                is_external=False,
+            ),
+            align_items="center",
+        ),
+        class_name=f"jumbotron bg-image text-white text-center py-5",
+    )
+
+def index_image():
+    return rx.vstack(
+        jumbotron_image(
+            title="Run Faster, Feel Better.",
+            description="The best running gear, right in your pocket.",
+            button_text="View Running Gear",
+            button_href="/running",
+        )
+    )
+
+app = rx.App()
+app.add_page(index)
+app.add_page(index_image, route="/image") #example of how to route for the image version.
+app.compile()
+
+
+
+
+
+claude warp 12marzo2025 21:20
+
+
+import reflex as rx
+from typing import List, Optional
+import random
+
+class Product(rx.Base):
+    id: int
+    name: str
+    price: float
+    description: str
+    image_url: str
+    category: str
+
+class State(rx.State):
+    products: List[Product] = [
+        Product(
+            id=1, 
+            name="Elite Performance Tee", 
+            price=49.99, 
+            description="Moisture-wicking athletic shirt for peak performance",
+            image_url="/images/performance_tee.jpg",
+            category="Tops"
+        ),
+        Product(
+            id=2, 
+            name="Pro Running Shorts", 
+            price=64.99, 
+            description="Lightweight, breathable running shorts with compression",
+            image_url="/images/running_shorts.jpg",
+            category="Bottoms"
+        ),
+        Product(
+            id=3, 
+            name="Compression Leggings", 
+            price=79.99, 
+            description="Full-length compression leggings for ultimate support",
+            image_url="/images/compression_leggings.jpg",
+            category="Bottoms"
+        ),
+        Product(
+            id=4, 
+            name="Training Jacket", 
+            price=89.99, 
+            description="Lightweight, water-resistant training jacket",
+            image_url="/images/training_jacket.jpg",
+            category="Outerwear"
+        )
+    ]
+    cart: List[Product] = []
+
+    def add_to_cart(self, product: Product):
+        """Add a product to the cart."""
+        if product not in self.cart:
+            self.cart.append(product)
+
+    def remove_from_cart(self, product: Product):
+        """Remove a product from the cart."""
+        self.cart = [item for item in self.cart if item.id != product.id]
+
+    @property
+    def cart_total(self) -> float:
+        """Calculate the total price of items in the cart."""
+        return sum(item.price for item in self.cart)
+
+def jumbotron():
+    """Create the hero section with a compelling call to action."""
+    return rx.box(
+        rx.vstack(
+            rx.heading(
+                "ELITE PERFORMANCE SPORTSWEAR", 
+                font_size="3em", 
+                color="white", 
+                text_align="center"
+            ),
+            rx.text(
+                "Unleash Your Athletic Potential",
+                font_size="1.5em",
+                color="white",
+                margin_top="10px"
+            ),
+            rx.button(
+                "Shop Now", 
+                color_scheme="blue", 
+                size="lg",
+                margin_top="20px"
+            ),
+            align="center",
+            justify="center",
+            height="70vh",
+            width="100%",
+            background_image="url('/images/hero_background.jpg')",
+            background_size="cover",
+            background_position="center",
+            background_color="rgba(0,0,0,0.5)",
+            padding="2em",
+        )
+    )
+
+def product_gallery(products: List[Product]):
+    """Create a grid of product cards."""
+    return rx.container(
+        rx.vstack(
+            rx.heading("Featured Products", text_align="center", margin_bottom="20px"),
+            rx.grid(
+                rx.foreach(
+                    products,
+                    lambda product: rx.card(
+                        rx.vstack(
+                            rx.image(
+                                src=product.image_url, 
+                                height="250px", 
+                                width="250px", 
+                                object_fit="cover"
+                            ),
+                            rx.heading(product.name, size="md"),
+                            rx.text(f"${product.price:.2f}", color="green.500"),
+                            rx.text(product.description, font_size="sm"),
+                            rx.button(
+                                "Add to Cart", 
+                                color_scheme="blue", 
+                                on_click=State.add_to_cart(product)
+                            ),
+                            spacing="4",
+                            align="center"
+                        )
+                    )
+                ),
+                columns=[4],
+                spacing="6"
+            ),
+            spacing="6"
+        ),
+        max_width="1200px",
+        margin="auto"
+    )
+
+def video_showcase():
+    """Create a section for brand video showcase."""
+    return rx.container(
+        rx.vstack(
+            rx.heading("Behind the Performance", text_align="center"),
+            rx.text(
+                "Discover the innovation and passion behind our sportswear",
+                text_align="center"
+            ),
+            rx.video(
+                src="/videos/brand_showcase.mp4",
+                width="100%",
+                max_width="800px",
+                controls=True
+            ),
+            spacing="6",
+            align="center",
+            padding="2em"
+        )
+    )
+
+def cart_section():
+    """Display the current cart contents."""
+    return rx.container(
+        rx.vstack(
+            rx.heading("Your Cart", text_align="center"),
+            rx.cond(
+                State.cart,
+                rx.vstack(
+                    rx.foreach(
+                        State.cart,
+                        lambda product: rx.hstack(
+                            rx.image(
+                                src=product.image_url, 
+                                width="100px", 
+                                height="100px", 
+                                object_fit="cover"
+                            ),
+                            rx.vstack(
+                                rx.text(product.name),
+                                rx.text(f"${product.price:.2f}"),
+                                spacing="2"
+                            ),
+                            rx.button(
+                                "Remove", 
+                                color_scheme="red", 
+                                size="sm",
+                                on_click=State.remove_from_cart(product)
+                            ),
+                            spacing="4",
+                            align="center"
+                        )
+                    ),
+                    rx.divider(),
+                    rx.text(f"Total: ${State.cart_total:.2f}", font_weight="bold"),
+                    rx.button("Checkout", color_scheme="green", size="lg"),
+                    spacing="4"
+                ),
+                rx.text("Your cart is empty", color="gray.500")
+            ),
+            spacing="6"
+        ),
+        max_width="800px",
+        margin="auto"
+    )
+
+def footer():
+    """Create a simple footer section."""
+    return rx.box(
+        rx.vstack(
+            rx.text("© 2023 Elite Performance Sportswear"),
+            rx.hstack(
+                rx.link("Privacy Policy"),
+                rx.link("Terms of Service"),
+                rx.link("Contact Us"),
+                spacing="4"
+            ),
+            padding="2em",
+            background_color="gray.100",
+            width="100%",
+            align_items="center"
+        )
+    )
+
+def index():
+    """Main landing page composition."""
+    return rx.vstack(
+        jumbotron(),
+        product_gallery(State.products),
+        video_showcase(),
+        cart_section(),
+        footer(),
+        spacing="0"
+    )
+
+app = rx.App(
+    stylesheets=[
+        "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+    ]
+)
+app.add_page(index)
+app.compile()
+
+import reflex as rx
+from typing import List
+
+class Product(rx.Base):
+    id: int
+    name: str
+    price: float
+    image_url: str
+
+class State(rx.State):
+    cart: List[Product] = []
+
+    def add_to_cart(self, product: Product):
+        """Add a product to the cart."""
+        self.cart.append(product)
+
+    @rx.cached_var
+    def cart_total(self) -> float:
+        """Calculate total cart value."""
+        return sum(item.price for item in self.cart)
+
+def jumbotron():
+    """Create the hero section of the sportswear store."""
+    return rx.box(
+        rx.vstack(
+            rx.heading(
+                "ELITE PERFORMANCE SPORTSWEAR", 
+                font_size="3em", 
+                color="white",
+                text_align="center"
+            ),
+            rx.text(
+                "Elevate Your Athletic Potential",
+                font_size="1.5em",
+                color="white",
+                margin_bottom="20px"
+            ),
+            rx.button(
+                "Shop Now", 
+                color_scheme="blue", 
+                size="lg",
+                on_click=lambda: State.add_to_cart(
+                    Product(
+                        id=1, 
+                        name="Featured Item", 
+                        price=49.99, 
+                        image_url="/path/to/featured_item.jpg"
+                    )
+                )
+            ),
+            spacing="4",
+            align_items="center",
+            justify_content="center",
+            height="100%",
+        ),
+        background_image="url('/path/to/hero_background.jpg')",
+        background_size="cover",
+        background_position="center",
+        height="500px",
+        width="100%",
+        display="flex",
+        align_items="center",
+        justify_content="center",
+    )
+
+def product_gallery():
+    """Display a grid of featured sportswear products."""
+    return rx.grid(
+        rx.foreach(
+            State.cart_items,
+            lambda product: rx.grid_item(
+                rx.vstack(
+                    rx.image(
+                        src=product.image_url, 
+                        width="250px", 
+                        height="300px", 
+                        object_fit="cover"
+                    ),
+                    rx.text(product.name, font_weight="bold"),
+                    rx.text(f"${product.price:.2f}", color="green.500"),
+                    rx.button(
+                        "Add to Cart", 
+                        on_click=lambda p=product: State.add_to_cart(p),
+                        color_scheme="blue",
+                        variant="outline"
+                    ),
+                    rx.text(product.description, color="gray.600", font_size="sm"),
+                    spacing="2",
+                    align_items="center",
+                    padding="2"
+                )
+            )
+        ),
+        columns=[4],
+        spacing="4",
+        padding="6"
+    )
+
+def video_showcase():
+    """Create a video section highlighting brand performance."""
+    return rx.container(
+        rx.heading("Behind the Performance", text_align="center", margin_bottom="30px"),
+        rx.vstack(
+            rx.text(
+                "Witness the Innovation and Technology That Drives Our Sportswear",
+                text_align="center",
+                margin_bottom="20px"
+            ),
+            rx.video(
+                src="/path/to/brand_showcase.mp4",
+                width="80%",
+                height="500px",
+                controls=True
+            ),
+            spacing="4",
+            align_items="center",
+        ),
+        margin_top="50px",
+    )
+
+def index():
+    """Main landing page for the sportswear store."""
+    return rx.fragment(
+        jumbotron(),
+        product_gallery(),
+        video_showcase(),
+    )
+
+# Create the Reflex app
+app = rx.App(
+    theme=rx.theme(
+        appearance="light", 
+        accent_color="blue", 
+        font_family="Inter, sans-serif"
+    )
+)
+
+# Add the index page
+app.add_page(index)
+
+import reflex as rx
+from typing import List, Optional
+
+class Product:
+    def __init__(self, name: str, price: float, image: str, description: Optional[str] = None):
+        self.name = name
+        self.price = price
+        self.image = image
+        self.description = description
+
+class State(rx.State):
+    """Manage application state for the sportswear store."""
+    
+    cart_items: List[Product] = []
+    featured_products: List[Product] = [
+        Product("Athlete Performance Tee", 49.99, "/images/tee1.jpg", "Moisture-wicking athletic shirt"),
+        Product("Pro Running Shorts", 59.99, "/images/shorts1.jpg", "Lightweight compression shorts"),
+        Product("Flex Compression Leggings", 79.99, "/images/leggings1.jpg", "High-performance athletic leggings"),
+        Product("Urban Sports Jacket", 129.99, "/images/jacket1.jpg", "Versatile windbreaker for training"),
+    ]
+
+    def add_to_cart(self, product: Product):
+        """Add a product to the shopping cart."""
+        self.cart_items.append(product)
+
+def jumbotron():
+    """Create a hero section with a compelling background and call-to-action."""
+    return rx.box(
+        rx.vstack(
+            rx.heading("ELITE PERFORMANCE SPORTSWEAR", size="2xl", color="white"),
+            rx.text(
+                "Elevate Your Athletic Potential with Cutting-Edge Sportswear",
+                size="lg", 
+                color="white"
+            ),
+            rx.button(
+                "Shop Now", 
+                size="lg", 
+                color_scheme="blue", 
+                variant="solid"
+            ),
+            spacing="4",
+            align_items="center",
+            text_align="center",
+            height="100%",
+            justify_content="center"
+        ),
+        background_image="url('/images/hero-bg.jpg')",
+        background_size="cover",
+        background_position="center",
+        height="500px",
+        width="100%"
+    )
+
+def product_gallery():
+    """Display a grid of featured sportswear products."""
+    return rx.grid(
+        rx.foreach(
+            State.featured_products,
+            lambda product: rx.grid_item(
+                rx.vstack(
+                    rx.image(
+                        src=product.image, 
+                        width="250px", 
+                        height="300px", 
+                        object_fit="cover"
+                    ),
+                    rx.text(product.name, font_weight="bold"),
+                    rx.text(f"${product.price}", color="green.500"),
+                    rx.button(
+                        "Add to Cart", 
+                        on_click=lambda p=product: State.add_to_cart(p),
+                        color_scheme="blue",
+                        variant="outline"
+                    ),
+                    spacing="2",
+                    align_items="center",
+                    padding="2"
+                )
+            )
+        ),
+        columns=[4],
+        spacing="4",
+        padding="6"
+    )
+
+def video_showcase():
+    """Create a video section highlighting brand or product features."""
+    return rx.container(
+        rx.vstack(
+            rx.heading("Behind the Performance", size="xl"),
+            rx.video(
+                src="/videos/brand_showcase.mp4",
+                width="800px",
+                height="450px",
+                controls=True
+            ),
+            rx.text(
+                "Discover the innovation and technology behind our sportswear",
+                size="md",
+                color="gray.600"
+            ),
+            spacing="4",
+            align_items="center"
+        )
+    )
+
+def index():
+    """Main landing page component."""
+    return rx.vstack(
+        jumbotron(),
+        rx.container(
+            rx.heading("Featured Products", size="xl", padding="4"),
+            product_gallery(),
+            width="100%",
+            max_width="1400px",
+            margin_x="auto"
+        ),
+        video_showcase(),
+        spacing="8",
+        width="100%"
+    )
+
+app = rx.App(
+    stylesheets=[
+        "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+    ]
+)
+app.add_page(index)
+        rx.text(
+                "Discover the innovation and technology behind our sportswear",
+    size="md",
+    color="gray.600"
+),
+    spacing="4",
+    align_items="center"
+)
+#\"\"\"Main landing page component.\"\"\"\n
+    return rx.vstack(
+        jumbotron(),
+        rx.container(
+            rx.heading("Featured Products", size="xl", padding="4"),
+            product_gallery(),
+            width="100%",
+            max_width="1400px",
+            margin_x="auto"
+        ),
+        video_showcase(),
+        spacing="8",
+        width="100%"
+    )
+
+app = rx.App(
+    stylesheets=[
+        "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+    ]
+)
+app.add_page(index)
+app.compile()
+
+
+
+
+copilot github review miercoles 12 marzo 2025
+
+
+import reflex as rx
+from typing import List, Optional
+
+class Product(rx.Base):
+    id: int
+    name: str
+    price: float
+    description: str
+    image_url: str
+    category: str
+
+class State(rx.State):
+    products: List[Product] = [
+        Product(
+            id=1, 
+            name="Elite Performance Tee", 
+            price=49.99, 
+            description="Moisture-wicking athletic shirt for peak performance",
+            image_url="/images/performance_tee.jpg",
+            category="Tops"
+        ),
+        Product(
+            id=2, 
+            name="Pro Running Shorts", 
+            price=64.99, 
+            description="Lightweight, breathable running shorts with compression",
+            image_url="/images/running_shorts.jpg",
+            category="Bottoms"
+        ),
+        Product(
+            id=3, 
+            name="Compression Leggings", 
+            price=79.99, 
+            description="Full-length compression leggings for ultimate support",
+            image_url="/images/compression_leggings.jpg",
+            category="Bottoms"
+        ),
+        Product(
+            id=4, 
+            name="Training Jacket", 
+            price=89.99, 
+            description="Lightweight, water-resistant training jacket",
+            image_url="/images/training_jacket.jpg",
+            category="Outerwear"
+        )
+    ]
+    cart: List[Product] = []
+
+    def add_to_cart(self, product: Product):
+        """Add a product to the cart."""
+        if product not in self.cart:
+            self.cart.append(product)
+
+    def remove_from_cart(self, product: Product):
+        """Remove a product from the cart."""
+        self.cart = [item for item in self.cart if item.id != product.id]
+
+    @property
+    def cart_total(self) -> float:
+        """Calculate the total price of items in the cart."""
+        return sum(item.price for item in self.cart)
+
+def jumbotron():
+    """Create the hero section with a compelling call to action."""
+    return rx.box(
+        rx.vstack(
+            rx.heading(
+                "ELITE PERFORMANCE SPORTSWEAR", 
+                font_size="3em", 
+                color="white", 
+                text_align="center"
+            ),
+            rx.text(
+                "Unleash Your Athletic Potential",
+                font_size="1.5em",
+                color="white",
+                margin_top="10px"
+            ),
+            rx.button(
+                "Shop Now", 
+                color_scheme="blue", 
+                size="lg",
+                margin_top="20px"
+            ),
+            align="center",
+            justify="center",
+            height="70vh",
+            width="100%",
+            background_image="url('/images/hero_background.jpg')",
+            background_size="cover",
+            background_position="center",
+            background_color="rgba(0,0,0,0.5)",
+            padding="2em",
+        )
+    )
+
+def product_gallery(products: List[Product]):
+    """Create a grid of product cards."""
+    return rx.container(
+        rx.vstack(
+            rx.heading("Featured Products", text_align="center", margin_bottom="20px"),
+            rx.grid(
+                rx.foreach(
+                    products,
+                    lambda product: rx.card(
+                        rx.vstack(
+                            rx.image(
+                                src=product.image_url, 
+                                height="250px", 
+                                width="250px", 
+                                object_fit="cover"
+                            ),
+                            rx.heading(product.name, size="md"),
+                            rx.text(f"${product.price:.2f}", color="green.500"),
+                            rx.text(product.description, font_size="sm"),
+                            rx.button(
+                                "Add to Cart", 
+                                color_scheme="blue", 
+                                on_click=lambda: State.add_to_cart(product)
+                            ),
+                            spacing="4",
+                            align="center"
+                        )
+                    )
+                ),
+                columns=[4],
+                spacing="6"
+            ),
+            spacing="6"
+        ),
+        max_width="1200px",
+        margin="auto"
+    )
+
+def video_showcase():
+    """Create a section for brand video showcase."""
+    return rx.container(
+        rx.vstack(
+            rx.heading("Behind the Performance", text_align="center"),
+            rx.text(
+                "Discover the innovation and passion behind our sportswear",
+                text_align="center"
+            ),
+            rx.video(
+                src="/videos/brand_showcase.mp4",
+                width="100%",
+                max_width="800px",
+                controls=True
+            ),
+            spacing="6",
+            align="center",
+            padding="2em"
+        )
+    )
+
+def cart_section():
+    """Display the current cart contents."""
+    return rx.container(
+        rx.vstack(
+            rx.heading("Your Cart", text_align="center"),
+            rx.cond(
+                State.cart,
+                rx.vstack(
+                    rx.foreach(
+                        State.cart,
+                        lambda product: rx.hstack(
+                            rx.image(
+                                src=product.image_url, 
+                                width="100px", 
+                                height="100px", 
+                                object_fit="cover"
+                            ),
+                            rx.vstack(
+                                rx.text(product.name),
+                                rx.text(f"${product.price:.2f}"),
+                                spacing="2"
+                            ),
+                            rx.button(
+                                "Remove", 
+                                color_scheme="red", 
+                                size="sm",
+                                on_click=lambda: State.remove_from_cart(product)
+                            ),
+                            spacing="4",
+                            align="center"
+                        )
+                    ),
+                    rx.divider(),
+                    rx.text(f"Total: ${State.cart_total:.2f}", font_weight="bold"),
+                    rx.button("Checkout", color_scheme="green", size="lg"),
+                    spacing="4"
+                ),
+                rx.text("Your cart is empty", color="gray.500")
+            ),
+            spacing="6"
+        ),
+        max_width="800px",
+        margin="auto"
+    )
+
+def footer():
+    """Create a simple footer section."""
+    return rx.box(
+        rx.vstack(
+            rx.text("© 2023 Elite Performance Sportswear"),
+            rx.hstack(
+                rx.link("Privacy Policy"),
+                rx.link("Terms of Service"),
+                rx.link("Contact Us"),
+                spacing="4"
+            ),
+            padding="2em",
+            background_color="gray.100",
+            width="100%",
+            align_items="center"
+        )
+    )
+
+def index():
+    """Main landing page composition."""
+    return rx.vstack(
+        jumbotron(),
+        product_gallery(State.products),
+        video_showcase(),
+        cart_section(),
+        footer(),
+        spacing="0"
+    )
+
+app = rx.App(
+    stylesheets=[
+        "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+    ]
+)
+app.add_page(index)
+app.compile()
+
+
+
+originalll....__annotations__
+
+"""Welcome to Reflex! This file outlines the steps to create a basic app."""
+
+import reflex as rx
+
+from rxconfig import config
+
+
+class State(rx.State):
+    """The app state."""
+
+    ...
+
+
+def index() -> rx.Component:
+    # Welcome Page (Index)
+    return rx.container(
+        rx.color_mode.button(position="top-right"),
+        rx.vstack(
+            rx.heading("Welcome to Reflex!", size="9"),
+            rx.text(
+                "Get started by editing ",
+                rx.code(f"{config.app_name}/{config.app_name}.py"),
+                size="5",
+            ),
+            rx.link(
+                rx.button("Check out our docs!"),
+                href="https://reflex.dev/docs/getting-started/introduction/",
+                is_external=True,
+            ),
+            spacing="5",
+            justify="center",
+            min_height="85vh",
+        ),
+        rx.card(
+            rx.inset(
+                rx.heading("Rash guards"),
+                rx.image(
+                    src="/unnamed2.png",
+                    width="100%",
+                    height="auto",
+                ),
+                side="top",
+                pb="current",
+            ),
+            rx.text(
+                "Reflex is a web framework that allows developers to build their app in pure Python."
+            ),
+            width="25vw",
+        ),
+        rx.card(
+            rx.inset(
+                rx.heading("Shorts"),
+                rx.image(
+                    src="/unnamed5.png",
+                    width="100%",
+                    height="auto",
+                ),
+                side="top",
+                pb="current",
+            ),
+            rx.text(
+                "Reflex is a web framework that allows developers to build their app in pure Python."
+            ),
+            width="25vw",
+        ),
+    )
+
+
+app = rx.App()
+app.add_page(index)
