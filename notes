@@ -1,3 +1,11 @@
+
+rails new condominio
+
+
+
+pip install reflex --upgrade
+
+
 Reusable Component: The jumbotron function is now a reusable component, making it easy to create multiple jumbotrons with different content and styles.
 Parameters: The function takes parameters for the title, description, button text, button href, background color, text color, and button style, allowing for customization.
 Reflex Syntax: Uses Reflex's rx.box, rx.vstack, rx.heading, rx.text, and rx.link components to construct the jumbotron.

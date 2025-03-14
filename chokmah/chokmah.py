@@ -18,17 +18,10 @@ def index() -> rx.Component:
     return rx.container(
         rx.color_mode.button(position="top-right"),
         rx.vstack(
-            rx.heading("Welcome to Chokmah", size="9"),
-            rx.text(
-                "ELITE PERFORMANCE SPORTSWEAR!",
-                size="5",
-            ),
-            rx.link(
-                rx.button("Contact us!"),
-            ),
+            rx.heading("Chokmah", size="9"),
             spacing="5",
             justify="center",
-            min_height="85vh",
+            min_height="8vh",
         ),
 
         rx.box(
@@ -44,7 +37,7 @@ def index() -> rx.Component:
             ),
 
             rx.heading(
-                "ELITE PERFORMANCE SPORTSWEAR", 
+                "PERFORMANCE SPORTSWEAR", 
                 font_size="3em", 
                 color="white", 
                 text_align="center"
@@ -67,24 +60,15 @@ def index() -> rx.Component:
             padding="2em",
         ),
     
-        rx.card(
-            rx.inset(
-                rx.heading("Shorts"),
-                rx.image(
-                    src="/unnamed5.png",
-                    width="100%",
-                    height="auto",
-                ),
-                side="top",
-                pb="current",
-            ),
-            rx.text(
-                "Unleash Your Athletic Potential"
-            ),
-            width="25vw",
-        )
-    )
-
+            rx.text("Nos inspiramos en el conocimiento"),
+            rx.text("Nos inspiramos en el conocimiento"),
+            padding="2em",
+            background_color="gray.100",
+            width="100%",
+            align_items="center"
+    
+   
+)
 
 app = rx.App()
 app.add_page(index)
